@@ -5,6 +5,7 @@ import { Statistics } from '@/components/frontend/sections/Statistics'
 import { GalleryMasonry } from '@/components/frontend/sections/GalleryMasonry'
 import { LatestPosts } from '@/components/frontend/sections/LatestPosts'
 import { CTA } from '@/components/frontend/sections/CTA'
+import { SponsorBanner } from '@/components/frontend/sections/SponsorBanner'
 import { WhatsAppButton } from '@/components/frontend/WhatsAppButton'
 import { Building, MapPin } from 'lucide-react'
 
@@ -280,6 +281,13 @@ export default function BerandaPage() {
           </div>
         </div>
       </section>
+
+      <SponsorBanner
+        images={[
+          '/images/sponsors/sponsor-1.jpeg',
+          '/images/sponsors/sponsor-2.jpeg',
+        ]}
+      />
 
       <WhatsAppButton
         phone="6282175723169"
