@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react'
 import { Upload, X, Loader2 } from 'lucide-react'
 import Image from 'next/image'
+import { toast } from 'sonner'
 
 type Props = {
   value?: string
@@ -17,16 +18,17 @@ export function ImageUpload({ value, onChange, label = 'Upload Gambar' }: Props)
 
   async function handleFile(file: File) {
     if (!file.type.startsWith('image/')) {
-      setError('File harus berupa gambar')
+      toast.error('File harus berupa gambar')
       return
     }
     if (file.size > 10 * 1024 * 1024) {
-      setError('Ukuran file maksimal 10MB')
+      toast.error('Ukuran file maksimal 10MB')
       return
     }
 
     setError('')
     setUploading(true)
+    const loadingToast = toast.loading('Mengupload gambar...')
 
     try {
       const res = await fetch('/api/admin/upload', {
@@ -34,16 +36,20 @@ export function ImageUpload({ value, onChange, label = 'Upload Gambar' }: Props)
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename: file.name, contentType: file.type }),
       })
+      if (!res.ok) throw new Error('Gagal mendapatkan upload URL')
       const { signedUrl, publicUrl } = await res.json()
 
-      await fetch(signedUrl, {
+      const putRes = await fetch(signedUrl, {
         method: 'PUT',
         body: file,
         headers: { 'Content-Type': file.type },
       })
+      if (!putRes.ok) throw new Error('Gagal upload ke server')
 
       onChange(publicUrl)
+      toast.success('Gambar berhasil diupload!', { id: loadingToast })
     } catch {
+      toast.error('Upload gagal. Coba lagi.', { id: loadingToast })
       setError('Upload gagal. Coba lagi.')
     } finally {
       setUploading(false)

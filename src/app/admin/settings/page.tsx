@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Loader2, Save } from 'lucide-react'
+import { toast } from 'sonner'
 
 type Settings = {
   siteName?: string
@@ -20,12 +21,18 @@ export default function SettingsPage() {
   const [form, setForm] = useState<Settings>({})
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [saved, setSaved] = useState(false)
 
   useEffect(() => {
     fetch('/api/admin/settings')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('Gagal memuat')
+        return r.json()
+      })
       .then((data) => { setForm(data); setLoading(false) })
+      .catch(() => {
+        toast.error('Gagal memuat pengaturan')
+        setLoading(false)
+      })
   }, [])
 
   function set(key: keyof Settings) {
@@ -36,15 +43,17 @@ export default function SettingsPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
-    setSaved(false)
+    const loadingToast = toast.loading('Menyimpan pengaturan...')
     try {
-      await fetch('/api/admin/settings', {
+      const res = await fetch('/api/admin/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      setSaved(true)
-      setTimeout(() => setSaved(false), 3000)
+      if (!res.ok) throw new Error('Gagal menyimpan')
+      toast.success('Pengaturan berhasil disimpan!', { id: loadingToast })
+    } catch {
+      toast.error('Gagal menyimpan pengaturan', { id: loadingToast })
     } finally {
       setSaving(false)
     }
@@ -99,7 +108,6 @@ export default function SettingsPage() {
             {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
             {saving ? 'Menyimpan...' : 'Simpan Pengaturan'}
           </button>
-          {saved && <p className="text-sm text-green-600">✓ Tersimpan!</p>}
         </div>
       </form>
     </div>

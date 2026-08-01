@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2, Save, Eye } from 'lucide-react'
+import { toast } from 'sonner'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
 import { ImageUpload } from '@/components/admin/ImageUpload'
 
@@ -32,7 +33,6 @@ export function PostForm({ post, categories }: { post?: Post; categories: Catego
     status: post?.status ?? 'draft',
   })
   const [saving, setSaving] = useState(false)
-  const [error, setError] = useState('')
 
   function set(key: string) {
     return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -48,9 +48,13 @@ export function PostForm({ post, categories }: { post?: Post; categories: Catego
   }
 
   async function handleSubmit(status: 'draft' | 'published') {
-    if (!form.title.trim()) { setError('Judul wajib diisi'); return }
+    if (!form.title.trim()) {
+      toast.error('Judul wajib diisi')
+      return
+    }
     setSaving(true)
-    setError('')
+
+    const loadingToast = toast.loading(isEdit ? 'Menyimpan perubahan...' : 'Membuat berita...')
 
     const payload = {
       ...form,
@@ -68,11 +72,15 @@ export function PostForm({ post, categories }: { post?: Post; categories: Catego
           body: JSON.stringify(payload),
         }
       )
-      if (!res.ok) throw new Error('Gagal menyimpan')
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body.error || 'Gagal menyimpan')
+      }
+      toast.success(isEdit ? 'Berita berhasil diupdate!' : 'Berita berhasil dibuat!', { id: loadingToast })
       router.push('/admin/posts')
       router.refresh()
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Terjadi kesalahan')
+      toast.error(err instanceof Error ? err.message : 'Terjadi kesalahan', { id: loadingToast })
     } finally {
       setSaving(false)
     }
@@ -103,8 +111,6 @@ export function PostForm({ post, categories }: { post?: Post; categories: Catego
           </button>
         </div>
       </div>
-
-      {error && <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">{error}</p>}
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Main */}

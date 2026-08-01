@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
-import { Loader2, Trash2, Upload, X } from 'lucide-react'
+import { Loader2, Trash2, Upload, X, ZoomIn } from 'lucide-react'
+import { toast } from 'sonner'
 
 type MediaItem = {
   id: number
@@ -30,19 +31,32 @@ export default function GalleryPage() {
   const [previewUrl, setPreviewUrl] = useState('')
   const [pendingFile, setPendingFile] = useState<File | null>(null)
   const [error, setError] = useState('')
+  const [zoomImage, setZoomImage] = useState<MediaItem | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   async function loadItems() {
-    const res = await fetch('/api/admin/gallery')
-    setItems(await res.json())
-    setLoading(false)
+    try {
+      const res = await fetch('/api/admin/gallery')
+      if (!res.ok) throw new Error('Gagal memuat galeri')
+      setItems(await res.json())
+    } catch {
+      toast.error('Gagal memuat data galeri')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => { loadItems() }, [])
 
   function handleFileSelect(file: File) {
-    if (!file.type.startsWith('image/')) { setError('File harus gambar'); return }
-    if (file.size > 10 * 1024 * 1024) { setError('Maks 10MB'); return }
+    if (!file.type.startsWith('image/')) {
+      toast.error('File harus berupa gambar')
+      return
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Ukuran file maksimal 10MB')
+      return
+    }
     setError('')
     setPendingFile(file)
     setPreviewUrl(URL.createObjectURL(file))
@@ -51,9 +65,14 @@ export default function GalleryPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!pendingFile || !form.alt) { setError('Keterangan gambar wajib diisi'); return }
+    if (!pendingFile || !form.alt) {
+      toast.error('Keterangan gambar wajib diisi')
+      return
+    }
     setUploading(true)
     setError('')
+
+    const loadingToast = toast.loading('Mengupload foto...')
 
     try {
       const uploadRes = await fetch('/api/admin/upload', {
@@ -61,36 +80,47 @@ export default function GalleryPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename: pendingFile.name, contentType: pendingFile.type }),
       })
+      if (!uploadRes.ok) throw new Error('Gagal mendapatkan upload URL')
       const { signedUrl, publicUrl } = await uploadRes.json()
 
-      await fetch(signedUrl, { method: 'PUT', body: pendingFile, headers: { 'Content-Type': pendingFile.type } })
+      const putRes = await fetch(signedUrl, { method: 'PUT', body: pendingFile, headers: { 'Content-Type': pendingFile.type } })
+      if (!putRes.ok) throw new Error('Gagal upload file ke server')
 
-      await fetch('/api/admin/gallery', {
+      const saveRes = await fetch('/api/admin/gallery', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, imageUrl: publicUrl }),
       })
+      if (!saveRes.ok) throw new Error('Gagal menyimpan data foto')
 
+      toast.success('Foto berhasil diupload!', { id: loadingToast })
       setShowForm(false)
       setPendingFile(null)
       setPreviewUrl('')
       setForm({ alt: '', caption: '', category: 'general' })
       await loadItems()
-    } catch {
-      setError('Upload gagal. Coba lagi.')
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Upload gagal. Coba lagi.', { id: loadingToast })
     } finally {
       setUploading(false)
     }
   }
 
-  async function handleDelete(id: number) {
-    if (!confirm('Hapus foto ini?')) return
-    await fetch('/api/admin/gallery', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id }),
-    })
-    setItems((prev) => prev.filter((i) => i.id !== id))
+  async function handleDelete(id: number, alt: string) {
+    if (!confirm(`Hapus foto "${alt}"?`)) return
+    const loadingToast = toast.loading('Menghapus foto...')
+    try {
+      const res = await fetch('/api/admin/gallery', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+      if (!res.ok) throw new Error('Gagal menghapus foto')
+      setItems((prev) => prev.filter((i) => i.id !== id))
+      toast.success('Foto berhasil dihapus', { id: loadingToast })
+    } catch {
+      toast.error('Gagal menghapus foto', { id: loadingToast })
+    }
   }
 
   return (
@@ -125,8 +155,11 @@ export default function GalleryPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex gap-6">
               {previewUrl && (
-                <div className="relative w-32 h-24 rounded overflow-hidden border border-slate-200 flex-shrink-0">
-                  <Image src={previewUrl} alt="preview" fill className="object-cover" />
+                <div className="relative w-40 h-32 rounded overflow-hidden border border-slate-200 flex-shrink-0 bg-slate-100">
+                  <Image src={previewUrl} alt="preview" fill className="object-contain" />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[10px] text-center py-0.5 truncate px-1">
+                    {pendingFile?.name}
+                  </div>
                 </div>
               )}
               <div className="flex-1 space-y-3">
@@ -197,15 +230,21 @@ export default function GalleryPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {items.map((item) => (
             <div key={item.id} className="group relative bg-white border border-slate-200 rounded overflow-hidden">
-              <div className="relative aspect-square">
+              <div
+                className="relative aspect-square cursor-pointer"
+                onClick={() => setZoomImage(item)}
+              >
                 <Image src={item.imageUrl} alt={item.alt} fill className="object-cover" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <ZoomIn className="h-6 w-6 text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow" />
+                </div>
               </div>
               <div className="p-2">
                 <p className="text-xs font-medium text-slate-700 truncate">{item.alt}</p>
                 {item.caption && <p className="text-xs text-slate-400 truncate">{item.caption}</p>}
               </div>
               <button
-                onClick={() => handleDelete(item.id)}
+                onClick={() => handleDelete(item.id, item.alt)}
                 className="absolute top-2 right-2 bg-red-500 text-white rounded p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
                 title="Hapus foto"
               >
@@ -213,6 +252,30 @@ export default function GalleryPage() {
               </button>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Zoom Modal */}
+      {zoomImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setZoomImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setZoomImage(null)}
+              className="absolute -top-10 right-0 text-white hover:text-slate-300"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="relative w-full aspect-[4/3]">
+              <Image src={zoomImage.imageUrl} alt={zoomImage.alt} fill className="object-contain" />
+            </div>
+            <div className="mt-2 text-center">
+              <p className="text-white text-sm font-medium">{zoomImage.alt}</p>
+              {zoomImage.caption && <p className="text-white/70 text-xs">{zoomImage.caption}</p>}
+            </div>
+          </div>
         </div>
       )}
     </div>

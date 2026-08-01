@@ -2,14 +2,22 @@
 
 import { Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export function DeletePostButton({ id }: { id: number }) {
   const router = useRouter()
 
   async function handleDelete() {
     if (!confirm('Hapus berita ini?')) return
-    await fetch(`/api/admin/posts/${id}`, { method: 'DELETE' })
-    router.refresh()
+    const loadingToast = toast.loading('Menghapus berita...')
+    try {
+      const res = await fetch(`/api/admin/posts/${id}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Gagal menghapus')
+      toast.success('Berita berhasil dihapus', { id: loadingToast })
+      router.refresh()
+    } catch {
+      toast.error('Gagal menghapus berita', { id: loadingToast })
+    }
   }
 
   return (
