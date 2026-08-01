@@ -16,10 +16,10 @@ export function WhatsAppButton({ phone, message = 'Assalamualaikum...saya ingin 
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+      className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-green-600 hover:bg-green-700 flex items-center justify-center shadow-lg transition-all hover:scale-105"
       aria-label="Chat via WhatsApp"
     >
-      <MessageCircle className="h-7 w-7 text-white" />
+      <MessageCircle className="h-5 w-5 text-white" />
     </a>
   )
 }

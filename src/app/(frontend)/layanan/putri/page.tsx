@@ -13,7 +13,7 @@ export default function LayananPutriPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Tentang Panti Putri</h2>
@@ -26,7 +26,7 @@ export default function LayananPutriPage() {
                 untuk membentuk generasi yang beriman, bertakwa, dan berprestasi.
               </p>
 
-              <div className="bg-pink-50 border border-pink-200 rounded-lg p-4 mb-6">
+              <div className="bg-pink-50 border border-pink-200 rounded-none p-4 mb-6">
                 <h3 className="font-semibold text-pink-800 mb-2">Fasilitas:</h3>
                 <ul className="text-sm text-pink-700 space-y-1">
                   <li>• Asrama yang nyaman</li>
@@ -37,7 +37,7 @@ export default function LayananPutriPage() {
                 </ul>
               </div>
 
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <div className="bg-purple-50 border border-purple-200 rounded-none p-4">
                 <h3 className="font-semibold text-purple-800 mb-2">Kegiatan:</h3>
                 <ul className="text-sm text-purple-700 space-y-1">
                   <li>• Sholat berjamaah</li>
@@ -49,7 +49,7 @@ export default function LayananPutriPage() {
               </div>
             </div>
 
-            <div className="relative aspect-video rounded-xl overflow-hidden">
+            <div className="relative aspect-video rounded-none overflow-hidden">
               <img
                 src="/images/panti/gedung-putri.jpg"
                 alt="Panti Asuhan Putri Muhammadiyah Asahan"
@@ -71,3 +71,5 @@ export default function LayananPutriPage() {
     </>
   )
 }
+
+

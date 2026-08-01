@@ -24,7 +24,7 @@ export function FAQ({
 
   return (
     <section className="py-16 lg:py-24">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
@@ -44,7 +44,7 @@ export function FAQ({
           {items.map((item, index) => (
             <div
               key={index}
-              className="border border-slate-200 rounded-lg overflow-hidden"
+              className="border border-slate-200 rounded-none overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -77,3 +77,5 @@ export function FAQ({
     </section>
   )
 }
+
+

@@ -1,6 +1,4 @@
 import type { NextConfig } from 'next'
-import { withPayload } from '@payloadcms/next/withPayload'
-import path from 'path'
 
 const nextConfig: NextConfig = {
   images: {
@@ -11,17 +9,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**.r2.dev',
       },
       {
         protocol: 'https',
-        hostname: '**.unsplash.com',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
-  turbopack: {
-    root: path.resolve(__dirname),
-  },
 }
 
-export default withPayload(nextConfig)
+export default nextConfig

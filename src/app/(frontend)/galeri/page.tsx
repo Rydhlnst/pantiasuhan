@@ -2,24 +2,20 @@ import React from 'react'
 import { Hero } from '@/components/frontend/sections/Hero'
 import { GalleryMasonry } from '@/components/frontend/sections/GalleryMasonry'
 import { CTA } from '@/components/frontend/sections/CTA'
-import { fetchCollection, getMediaUrl } from '@/lib/payload-api'
-
-async function getAllMedia() {
-  try {
-    const media = await fetchCollection<{ id: string; url?: string; alt: string; caption?: string; category?: string }>('media', 'limit=50&sort=-createdAt', { next: { revalidate: 60 } })
-    return media.docs
-  } catch {
-    return []
-  }
-}
+import { getMediaItems } from '@/lib/cms-api'
 
 export default async function GaleriPage() {
-  const media = await getAllMedia()
+  let media: Awaited<ReturnType<typeof getMediaItems>> = []
+  try {
+    media = await getMediaItems(50)
+  } catch {
+    // CMS belum tersedia
+  }
 
   const galleryImages = media
-    .filter((m) => m.url)
+    .filter((m) => m.image?.url)
     .map((m) => ({
-      src: getMediaUrl(m.url),
+      src: m.image!.url,
       alt: m.alt,
       caption: m.caption || m.alt,
     }))

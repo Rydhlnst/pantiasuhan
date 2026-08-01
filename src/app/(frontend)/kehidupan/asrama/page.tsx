@@ -21,7 +21,7 @@ export default function AsramaPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Asrama Pondok Pesantren</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
@@ -32,10 +32,10 @@ export default function AsramaPage() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {asrama.map((item, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm border p-6">
+              <div key={index} className="bg-white rounded-none shadow-sm border p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-semibold text-slate-900">{item.name}</h3>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${item.gender === 'Putra' ? 'bg-blue-100 text-blue-700' : 'bg-pink-100 text-pink-700'}`}>
+                  <span className={`px-3 py-1 rounded-none text-sm font-medium ${item.gender === 'Putra' ? 'bg-blue-100 text-blue-700' : 'bg-pink-100 text-pink-700'}`}>
                     {item.gender}
                   </span>
                 </div>
@@ -69,3 +69,5 @@ export default function AsramaPage() {
     </>
   )
 }
+
+

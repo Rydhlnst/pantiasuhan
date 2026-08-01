@@ -6,95 +6,43 @@ import { GalleryMasonry } from '@/components/frontend/sections/GalleryMasonry'
 import { LatestPosts } from '@/components/frontend/sections/LatestPosts'
 import { CTA } from '@/components/frontend/sections/CTA'
 import { WhatsAppButton } from '@/components/frontend/WhatsAppButton'
-import { fetchGlobal, fetchCollection, getMediaUrl } from '@/lib/payload-api'
+import { Building, MapPin } from 'lucide-react'
 
-async function getSettings() {
-  try {
-    const settings = await fetchGlobal<{ siteName?: string; contact?: { phone?: string; whatsapp?: string; address?: string }; donation?: { bankAccounts?: Array<{ bankName: string; accountNumber: string; accountName: string }>; donationInfo?: string }; organization?: { name?: string; vision?: string; mission?: Array<{ text: string }> } }>('settings', { next: { revalidate: 60 } })
-    return settings
-  } catch {
-    return null
-  }
-}
-
-async function getMedia() {
-  try {
-    const media = await fetchCollection<{ id: string; url?: string; alt: string; caption?: string; category?: string }>('media', 'limit=20&sort=-createdAt', { next: { revalidate: 60 } })
-    return media.docs
-  } catch {
-    return []
-  }
-}
-
-async function getPosts() {
-  try {
-    const posts = await fetchCollection<{ id: string; title: string; slug: string; excerpt?: string; publishedAt?: string; featuredImage?: string | { url: string } | null; category?: { name: string; slug: string } | null }>('posts', 'limit=3&sort=-publishedAt&where[status][equals]=published', { next: { revalidate: 60 } })
-    return posts.docs
-  } catch {
-    return []
-  }
-}
-
-export default async function BerandaPage() {
-  const [settings, media, posts] = await Promise.all([
-    getSettings(),
-    getMedia(),
-    getPosts(),
-  ])
-
-  const siteName = settings?.siteName || 'Panti Asuhan Muhammadiyah Asahan'
-  const phone = settings?.contact?.phone || '082175723169'
-  const whatsapp = settings?.contact?.whatsapp || '6282175723169'
-  const address = settings?.contact?.address || 'Jl. Setia Budi, Kel. Selawan, Kec. Kisaran Timur, Kab. Asahan, Prov. Sumatera Utara'
-
-  const galleryImages = media
-    .filter((m) => m.category === 'activity' || m.category === 'children' || m.category === 'building' || m.category === 'general')
-    .map((m) => ({
-      src: getMediaUrl(m.url),
-      alt: m.alt,
-      caption: m.caption || m.alt,
-    }))
-
-  const heroImages = media
-    .filter((m) => m.category === 'building' || m.category === 'hero')
-    .map((m) => ({
-      title: m.alt,
-      image: getMediaUrl(m.url),
-    }))
-
-  const postsFormatted = posts.map((p) => ({
-    title: p.title,
-    slug: p.slug,
-    excerpt: p.excerpt || '',
-    publishedAt: p.publishedAt || '',
-    featuredImage: typeof p.featuredImage === 'object' && p.featuredImage?.url
-      ? getMediaUrl(p.featuredImage.url)
-      : undefined,
-    category: p.category ? { name: p.category.name, slug: p.category.slug } : undefined,
-  }))
-
+export default function BerandaPage() {
   return (
     <>
       <Hero
-        slides={
-          heroImages.length > 0
-            ? heroImages.map((h, i) => ({
-                title: h.title || 'Panti Asuhan Muhammadiyah Asahan',
-                subtitle: 'Kisaran - Asahan, Sumatera Utara',
-                image: h.image,
-                link: i === 0 ? '/profil/tentang' : i === 1 ? '/donasi' : '/kontak',
-                linkLabel: i === 0 ? 'Selengkapnya' : i === 1 ? 'Donasi Sekarang' : 'Hubungi Kami',
-              }))
-            : [
-                {
-                  title: 'Panti Asuhan Anak Yatim Muhammadiyah',
-                  subtitle: 'Kisaran - Asahan, Sumatera Utara',
-                  image: '/images/panti/gedung-putra.jpg',
-                  link: '/profil/tentang',
-                  linkLabel: 'Selengkapnya',
-                },
-              ]
-        }
+        slides={[
+          {
+            title: 'Panti Asuhan Yatim Muhammadiyah',
+            subtitle: 'Kisaran - Asahan, Sumatera Utara',
+            description: 'Melayani anak yatim, piatu, fakir miskin, terlantar dengan penuh kasih sayang',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg',
+            link: '/profil/tentang',
+            linkLabel: 'Selengkapnya',
+          },
+          {
+            title: 'Gedung Panti Asuhan Putra',
+            subtitle: 'Fasilitas yang nyaman untuk anak-anak asuh',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg',
+            link: '/layanan/putra',
+            linkLabel: 'Lihat Fasilitas',
+          },
+          {
+            title: 'Gedung Panti Asuhan Putri',
+            subtitle: 'Lingkungan yang aman dan Islami',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39.jpeg',
+            link: '/layanan/putri',
+            linkLabel: 'Lihat Fasilitas',
+          },
+          {
+            title: 'Mari Berdonasi',
+            subtitle: 'Bantu kami mewujudkan kesejahteraan anak yatim',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (2).jpeg',
+            link: '/donasi',
+            linkLabel: 'Donasi Sekarang',
+          },
+        ]}
       />
 
       <Sekilas
@@ -103,104 +51,79 @@ export default async function BerandaPage() {
           {
             title: 'Visi & Misi',
             description: 'Berkembangnya Fungsi Pelayanan Sosial Muhammadiyah Dalam Mengentaskan Kemiskinan.',
-            image: galleryImages.length > 0 ? galleryImages[0].src : '/images/panti/visi-misi.jpg',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg',
             link: '/profil/visi-misi',
             linkLabel: 'Lihat Detail',
           },
           {
             title: 'Kegiatan Pengajian',
             description: 'Kegiatan pengajian rutin anak-anak asuh putri untuk membentuk karakter religius.',
-            image: galleryImages.length > 1 ? galleryImages[1].src : '/images/panti/pengajian-putri.jpg',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (1).jpeg',
             link: '/galeri',
             linkLabel: 'Lihat Galeri',
           },
           {
-            title: 'Kegiatan Anak',
+            title: 'Penerimaan Bantuan',
             description: 'Anak-anak asuh menerima bantuan pakaian dan perlengkapan.',
-            image: galleryImages.length > 2 ? galleryImages[2].src : '/images/panti/anak-baju.jpg',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (2).jpeg',
             link: '/galeri',
             linkLabel: 'Lihat Galeri',
           },
           {
             title: 'Mari Donasi',
             description: 'Bantu kami mewujudkan kesejahteraan sosial anak melalui donasi Anda.',
-            image: galleryImages.length > 3 ? galleryImages[3].src : '/images/panti/kegiatan-berkebun.jpg',
+            image: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.40.jpeg',
             link: '/donasi',
             linkLabel: 'Donasi Sekarang',
           },
         ]}
       />
 
-      <section className="py-12 lg:py-16 bg-white">
+      {/* About Section */}
+      <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
+              <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-none mb-4">Tentang Kami</span>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-                {settings?.organization?.name || siteName}
+                Panti Asuhan Muhammadiyah Asahan
               </h2>
               <p className="text-slate-600 mb-4">
                 Panti Asuhan Anak Yatim Putra/Putri Muhammadiyah Asahan adalah salah satu amal usaha Muhammadiyah yang bergerak di bidang pelayanan sosial anak.
               </p>
-              <p className="text-slate-600 mb-4">
+              <p className="text-slate-600 mb-6">
                 Kami melayani anak yatim, piatu, fakir miskin, terlantar, dan penyandang masalah sosial dengan penuh kasih sayang dan kepedulian.
               </p>
-              <p className="text-slate-600 mb-6">
-                Lokasi kami berada di {address}.
-              </p>
-
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <h3 className="font-semibold text-green-800 mb-2">Layanan Kami:</h3>
-                <ul className="text-sm text-green-700 space-y-1">
-                  <li>• Panti Asuhan Putra Muhammadiyah</li>
-                  <li>• Panti Asuhan Putri Muhammadiyah</li>
-                  <li>• Bisa langsung datang ke panti</li>
-                  <li>• Transfer ke rekening panti</li>
-                </ul>
-              </div>
-
               <div className="flex gap-3">
-                <a href={`https://wa.me/${whatsapp}`} target="_blank" rel="noopener noreferrer">
-                  <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium">
+                <a href="https://wa.me/6282175723169" target="_blank" rel="noopener noreferrer">
+                  <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-none font-medium transition-colors">
                     Hubungi Admin Rini
                   </button>
                 </a>
                 <a href="/donasi">
-                  <button className="border border-slate-300 hover:bg-slate-50 text-slate-700 px-6 py-2 rounded-lg font-medium">
+                  <button className="bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 px-6 py-2.5 rounded-none font-medium transition-colors">
                     Donasi Sekarang
                   </button>
                 </a>
               </div>
             </div>
-
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative aspect-square rounded-xl overflow-hidden">
-                <img
-                  src={galleryImages.length > 0 ? galleryImages[0].src : '/images/panti/gedung-putra.jpg'}
-                  alt="Panti Asuhan Putra"
-                  className="object-cover w-full h-full"
-                />
+              <div className="relative aspect-square rounded-none overflow-hidden shadow-lg">
+                <img src="/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg" alt="Panti Putra" className="object-cover w-full h-full" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                  <span className="text-white text-sm font-medium">Panti Asuhan Putra</span>
+                  <span className="text-white text-sm font-medium">Panti Putra</span>
                 </div>
               </div>
-              <div className="relative aspect-square rounded-xl overflow-hidden">
-                <img
-                  src={galleryImages.length > 1 ? galleryImages[1].src : '/images/panti/gedung-putri.jpg'}
-                  alt="Panti Asuhan Putri"
-                  className="object-cover w-full h-full"
-                />
+              <div className="relative aspect-square rounded-none overflow-hidden shadow-lg">
+                <img src="/images/panti/WhatsApp Image 2026-07-31 at 22.01.38 (1).jpeg" alt="Panti Putri" className="object-cover w-full h-full" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                  <span className="text-white text-sm font-medium">Panti Asuhan Putri</span>
+                  <span className="text-white text-sm font-medium">Panti Putri</span>
                 </div>
               </div>
-              <div className="relative aspect-square rounded-xl overflow-hidden col-span-2">
-                <img
-                  src={galleryImages.length > 2 ? galleryImages[2].src : '/images/panti/logo-lksa.jpg'}
-                  alt="Logo LKSA"
-                  className="object-contain w-full h-full bg-white p-4"
-                />
+              <div className="relative aspect-square rounded-none overflow-hidden shadow-lg col-span-2">
+                <img src="/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (1).jpeg" alt="Kegiatan" className="object-cover w-full h-full" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                  <span className="text-white text-sm font-medium">LKSA Panti Asuhan Muhammadiyah Asahan</span>
+                  <span className="text-white text-sm font-medium">Kegiatan Anak Asuh</span>
                 </div>
               </div>
             </div>
@@ -219,124 +142,140 @@ export default async function BerandaPage() {
         columns="4"
       />
 
-      <section className="py-12 lg:py-16 bg-slate-50">
+      {/* Visi Misi - Dark section */}
+      <section className="py-16 lg:py-20 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Visi & Misi</h2>
-            <p className="text-slate-600">Landasan gerakan pelayanan sosial kami</p>
+          <div className="text-center mb-12">
+            <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-none mb-4">Landasan Kami</span>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Visi & Misi</h2>
           </div>
-
           <div className="grid lg:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-green-700 mb-4">VISI</h3>
-              <p className="text-slate-600 leading-relaxed">
-                {settings?.organization?.vision || 'Berkembangnya Fungsi Pelayanan Sosial Muhammadiyah Dalam Mengentaskan Kemiskinan, meningkatkan Kualitas Hidup Masyarakat Dan Mewujudkan Masyarakat Yang Inklusif Melalui Sistem Yang Terencana Dan Terpadu Di Landasi Semangat Menegakkan Keadilan.'}
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/10">
+              <h3 className="text-xl font-bold text-blue-400 mb-4">VISI</h3>
+              <p className="text-white/80 leading-relaxed">
+                Berkembangnya Fungsi Pelayanan Sosial Muhammadiyah Dalam Mengentaskan Kemiskinan, meningkatkan Kualitas Hidup Masyarakat Dan Mewujudkan Masyarakat Yang Inklusif Melalui Sistem Yang Terencana Dan Terpadu Di Landasi Semangat Menegakkan Keadilan.
               </p>
             </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-green-700 mb-4">MISI</h3>
-              <ol className="space-y-3 text-slate-600">
-                {settings?.organization?.mission && settings.organization.mission.length > 0
-                  ? settings.organization.mission.map((m: { text: string }, i: number) => (
-                      <li key={i} className="flex gap-3">
-                        <span className="font-bold text-green-600">{String.fromCharCode(65 + i)}.</span>
-                        <span>{m.text}</span>
-                      </li>
-                    ))
-                  : (
-                    <>
-                      <li className="flex gap-3">
-                        <span className="font-bold text-green-600">A.</span>
-                        <span>Mewujudkan Kesejahteraan Sosial Anak Melalui Hak Dasar Anak.</span>
-                      </li>
-                      <li className="flex gap-3">
-                        <span className="font-bold text-green-600">B.</span>
-                        <span>Menjadikan Keluarga Pilar Utama Dalam Mewujudkan Kesejahteraan Sosial.</span>
-                      </li>
-                      <li className="flex gap-3">
-                        <span className="font-bold text-green-600">C.</span>
-                        <span>Memfasilitasi Keterlibatan Masyarakat Dalam Mewujudkan Kesejahteraan Sosial.</span>
-                      </li>
-                    </>
-                  )}
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/10">
+              <h3 className="text-xl font-bold text-blue-400 mb-4">MISI</h3>
+              <ol className="space-y-4 text-white/80">
+                <li className="flex gap-3">
+                  <span className="font-bold text-blue-400 text-lg">A.</span>
+                  <span>Mewujudkan Kesejahteraan Sosial Anak Melalui Hak Dasar Anak.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-bold text-blue-400 text-lg">B.</span>
+                  <span>Menjadikan Keluarga Pilar Utama Dalam Mewujudkan Kesejahteraan Sosial.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="font-bold text-blue-400 text-lg">C.</span>
+                  <span>Memfasilitasi Keterlibatan Masyarakat Dalam Mewujudkan Kesejahteraan Sosial.</span>
+                </li>
               </ol>
             </div>
           </div>
         </div>
       </section>
 
-      {galleryImages.length > 0 && (
-        <GalleryMasonry
-          title="Galeri Kegiatan"
-          subtitle="Dokumentasi kegiatan panti asuhan"
-          images={galleryImages.slice(0, 12)}
-          columns="3"
-        />
-      )}
-
-      {postsFormatted.length > 0 && (
-        <LatestPosts
-          title="Berita Terbaru"
-          posts={postsFormatted}
-          layout="grid"
-          viewAllUrl="/berita"
-        />
-      )}
-
-      <CTA
-        title="Mari Bersedekah"
-        description="Bantu kami mewujudkan kesejahteraan sosial anak yatim, piatu, fakir miskin, dan terlantar melalui donasi Anda."
-        buttons={[
-          { label: 'Donasi Sekarang', url: '/donasi', variant: 'primary' },
-          { label: 'Hubungi Kami', url: '/kontak', variant: 'outline' },
+      <GalleryMasonry
+        title="Galeri Kegiatan"
+        subtitle="Dokumentasi kegiatan panti asuhan"
+        images={[
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg', alt: 'Gedung Panti Putra', caption: 'Gedung Panti Putra' },
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39.jpeg', alt: 'Gedung Panti Putri', caption: 'Gedung Panti Putri' },
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38 (1).jpeg', alt: 'Panti Putri', caption: 'Panti Asuhan Putri' },
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (1).jpeg', alt: 'Pengajian Putri', caption: 'Kegiatan Pengajian' },
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (2).jpeg', alt: 'Penerimaan Bantuan', caption: 'Penerimaan Bantuan' },
+          { src: '/images/panti/WhatsApp Image 2026-07-31 at 22.01.40.jpeg', alt: 'Kegiatan Berkebun', caption: 'Kegiatan Berkebun' },
         ]}
+        columns="3"
       />
 
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Informasi Donasi</h2>
-            <p className="text-slate-600">Cara Berdonasi</p>
+      <LatestPosts
+        title="Berita Terbaru"
+        posts={[
+          {
+            title: 'Kegiatan Rutin Pengajian Anak Asuh',
+            slug: 'kegiatan-pengajian',
+            excerpt: 'Kegiatan pengajian rutin dilaksanakan setiap hari untuk membentuk karakter religius anak-anak.',
+            publishedAt: '2024-01-15',
+            category: { name: 'Kegiatan', slug: 'kegiatan' },
+          },
+          {
+            title: 'Bantuan Pakaian untuk Anak Asuh',
+            slug: 'bantuan-pakaian',
+            excerpt: 'Penerimaan bantuan berupa pakaian untuk anak-anak asuh panti.',
+            publishedAt: '2024-01-10',
+            category: { name: 'Bantuan', slug: 'bantuan' },
+          },
+          {
+            title: 'Kegiatan Berkebun Anak Asuh',
+            slug: 'kegiatan-berkebun',
+            excerpt: 'Kegiatan positif anak-anak asuh dalam belajar berkebun dan pertanian.',
+            publishedAt: '2024-01-05',
+            category: { name: 'Kegiatan', slug: 'kegiatan' },
+          },
+        ]}
+        layout="grid"
+        viewAllUrl="/berita"
+      />
+
+      {/* Donasi Section - Green accent */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-emerald-600 to-teal-700 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Mari Bersedekah</h2>
+          <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+            Bantu kami mewujudkan kesejahteraan sosial anak yatim, piatu, fakir miskin, dan terlantar melalui donasi Anda.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <a href="/donasi" className="bg-white text-emerald-700 hover:bg-emerald-50 px-8 py-3 rounded-none font-semibold transition-colors">
+              Donasi Sekarang
+            </a>
+            <a href="/kontak" className="border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-none font-semibold transition-colors">
+              Hubungi Kami
+            </a>
           </div>
+        </div>
+      </section>
 
+      {/* Info Donasi */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-none mb-4">Donasi</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Informasi Donasi</h2>
+          </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-green-50 border border-green-200 rounded-xl p-6">
-              <h3 className="font-bold text-green-800 mb-3">Cara 1: Datang Langsung</h3>
-              <p className="text-sm text-green-700 mb-2">
-                Anda bisa langsung datang ke panti asuhan:
-              </p>
-              <ul className="text-sm text-green-700 space-y-1">
-                <li>• Panti Asuhan Putra Muhammadiyah</li>
-                <li>• Panti Asuhan Putri Muhammadiyah</li>
-              </ul>
-              <p className="text-sm text-green-700 mt-2">
-                <strong>Alamat:</strong> {address}
-              </p>
+            <div className="bg-white rounded-none p-6 shadow-sm border border-blue-100">
+              <div className="w-12 h-12 bg-blue-100 flex items-center justify-center mb-4">
+                <Building className="h-6 w-6 text-blue-600" />
+              </div>
+              <h3 className="font-bold text-slate-900 mb-3">Transfer Bank</h3>
+              <div className="bg-blue-50 rounded-none p-4">
+                <p className="font-bold text-slate-900">Bank BNI</p>
+                <p className="text-xl font-bold text-blue-600">3271 0102 4236 534</p>
+                <p className="text-sm text-slate-500">a.n. Panti Asuhan Muhammadiyah Asahan</p>
+              </div>
+              <p className="text-sm text-slate-500 mt-3">Setelah transfer, konfirmasi ke Admin Rini: 082175723169</p>
             </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-              <h3 className="font-bold text-blue-800 mb-3">Cara 2: Transfer Bank</h3>
-              <p className="text-sm text-blue-700 mb-2">
-                Anda bisa mentransfer donasi ke rekening:
-              </p>
-              {settings?.donation?.bankAccounts && settings.donation.bankAccounts.length > 0 ? (
-                settings.donation.bankAccounts.map((bank, i) => (
-                  <div key={i} className="bg-white rounded-lg p-4 mt-2">
-                    <p className="font-bold text-slate-900">{bank.bankName}</p>
-                    <p className="text-lg font-bold text-slate-900">{bank.accountNumber}</p>
-                    <p className="text-sm text-slate-600">a.n. {bank.accountName}</p>
-                  </div>
-                ))
-              ) : (
-                <div className="bg-white rounded-lg p-4 mt-2">
-                  <p className="font-bold text-slate-900">Bank BNI</p>
-                  <p className="text-lg font-bold text-slate-900">3271 0102 4236 534</p>
-                  <p className="text-sm text-slate-600">a.n. Panti Asuhan Muhammadiyah Asahan</p>
-                </div>
-              )}
-              <p className="text-sm text-blue-700 mt-3">
-                Setelah transfer, mohon konfirmasi ke Admin Rini: <strong>{phone}</strong>
+            <div className="bg-white rounded-none p-6 shadow-sm border border-blue-100">
+              <div className="w-12 h-12 bg-green-100 flex items-center justify-center mb-4">
+                <MapPin className="h-6 w-6 text-green-600" />
+              </div>
+              <h3 className="font-bold text-slate-900 mb-3">Datang Langsung</h3>
+              <p className="text-slate-600 mb-3">Anda bisa langsung datang ke:</p>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-blue-500 rounded-none"></span>
+                  Panti Asuhan Putra Muhammadiyah
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-pink-500 rounded-none"></span>
+                  Panti Asuhan Putri Muhammadiyah
+                </li>
+              </ul>
+              <p className="text-sm text-slate-500 mt-3">
+                Jl. Setia Budi, Kel. Selawan, Kec. Kisaran Timur, Kab. Asahan
               </p>
             </div>
           </div>
@@ -344,9 +283,10 @@ export default async function BerandaPage() {
       </section>
 
       <WhatsAppButton
-        phone={whatsapp}
+        phone="6282175723169"
         message="Assalamualaikum...saya ingin mendapatkan informasi tentang panti asuhan muhammadiyah asahan, bisa dibantu?"
       />
     </>
   )
 }
+

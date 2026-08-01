@@ -26,7 +26,7 @@ export default function KontakPage() {
     setError('')
 
     try {
-      const response = await fetch('/api/contact-submissions', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -53,7 +53,7 @@ export default function KontakPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Informasi Kontak</h2>
@@ -63,7 +63,7 @@ export default function KontakPage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 rounded-none flex items-center justify-center shrink-0">
                     <MapPin className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
@@ -77,8 +77,8 @@ export default function KontakPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center shrink-0">
-                    <Phone className="h-6 w-6 text-green-600" />
+                  <div className="w-12 h-12 bg-blue-100 rounded-none flex items-center justify-center shrink-0">
+                    <Phone className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">Telepon & WhatsApp</h3>
@@ -87,7 +87,7 @@ export default function KontakPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-purple-100 rounded-none flex items-center justify-center shrink-0">
                     <Mail className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
@@ -97,7 +97,7 @@ export default function KontakPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 bg-orange-100 rounded-none flex items-center justify-center shrink-0">
                     <Clock className="h-6 w-6 text-orange-600" />
                   </div>
                   <div>
@@ -115,7 +115,7 @@ export default function KontakPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button className="w-full bg-green-600 hover:bg-green-700">
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
                       <MessageCircle className="mr-2 h-5 w-5" />
                       Chat via WhatsApp
                     </Button>
@@ -124,13 +124,13 @@ export default function KontakPage() {
               </div>
             </div>
 
-            <div className="bg-slate-50 rounded-2xl p-8">
+            <div className="bg-slate-50 rounded-none p-8">
               <h3 className="text-xl font-semibold text-slate-900 mb-6">Kirim Pesan</h3>
 
               {isSuccess ? (
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Send className="h-8 w-8 text-green-600" />
+                  <div className="w-16 h-16 bg-blue-100 rounded-none flex items-center justify-center mx-auto mb-4">
+                    <Send className="h-8 w-8 text-blue-600" />
                   </div>
                   <h4 className="text-lg font-semibold text-slate-900 mb-2">Pesan Terkirim!</h4>
                   <p className="text-slate-600">Terima kasih, kami akan segera merespon.</p>
@@ -138,7 +138,7 @@ export default function KontakPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {error && (
-                    <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm">
+                    <div className="p-3 bg-red-50 border border-red-200 text-red-600 rounded-none text-sm">
                       {error}
                     </div>
                   )}
@@ -186,3 +186,6 @@ export default function KontakPage() {
     </>
   )
 }
+
+
+

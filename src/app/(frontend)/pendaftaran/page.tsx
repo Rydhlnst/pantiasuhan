@@ -61,16 +61,16 @@ export default function PendaftaranPage() {
           overlay="dark"
         />
         <section className="py-16 lg:py-24">
-          <div className="max-w-2xl mx-auto px-4 text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="h-10 w-10 text-green-600" />
+          <div className="max-w-2xl mx-auto mx-auto px-4 text-center">
+            <div className="w-20 h-20 bg-blue-100 rounded-none flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-10 w-10 text-blue-600" />
             </div>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Pendaftaran Berhasil!</h2>
             <p className="text-slate-600 mb-8">
               Data pendaftaran Anda telah kami terima. Tim kami akan menghubungi Anda
               dalam 1×24 jam untuk proses selanjutnya.
             </p>
-            <div className="bg-slate-50 rounded-xl p-6 text-left mb-8">
+            <div className="bg-slate-50 rounded-none p-6 text-left mb-8">
               <h3 className="font-semibold mb-4">Yang perlu disiapkan:</h3>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li className="flex items-center gap-2">
@@ -115,25 +115,25 @@ export default function PendaftaranPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-sm border p-8">
+        <div className="max-w-4xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-none shadow-sm border p-8">
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className={cn('flex items-center gap-2', step >= 1 ? 'text-blue-600' : 'text-slate-400')}>
-                <div className={cn('w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium', step >= 1 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
+                <div className={cn('w-8 h-8 rounded-none flex items-center justify-center text-sm font-medium', step >= 1 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
                   1
                 </div>
                 <span className="hidden sm:inline text-sm font-medium">Data Santri</span>
               </div>
               <div className="w-12 h-px bg-slate-200" />
               <div className={cn('flex items-center gap-2', step >= 2 ? 'text-blue-600' : 'text-slate-400')}>
-                <div className={cn('w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium', step >= 2 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
+                <div className={cn('w-8 h-8 rounded-none flex items-center justify-center text-sm font-medium', step >= 2 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
                   2
                 </div>
                 <span className="hidden sm:inline text-sm font-medium">Data Orang Tua</span>
               </div>
               <div className="w-12 h-px bg-slate-200" />
               <div className={cn('flex items-center gap-2', step >= 3 ? 'text-blue-600' : 'text-slate-400')}>
-                <div className={cn('w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium', step >= 3 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
+                <div className={cn('w-8 h-8 rounded-none flex items-center justify-center text-sm font-medium', step >= 3 ? 'bg-blue-600 text-white' : 'bg-slate-200')}>
                   3
                 </div>
                 <span className="hidden sm:inline text-sm font-medium">Konfirmasi</span>
@@ -169,7 +169,7 @@ export default function PendaftaranPage() {
                     <div className="space-y-2">
                       <Label>Jenis Kelamin *</Label>
                       <select
-                        className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm"
+                        className="flex h-10 w-full rounded-none border border-slate-200 bg-white px-3 py-2 text-sm"
                         value={formData.gender}
                         onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                         required
@@ -220,7 +220,7 @@ export default function PendaftaranPage() {
                     <div className="space-y-2">
                       <Label>Pilihan Program *</Label>
                       <select
-                        className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm"
+                        className="flex h-10 w-full rounded-none border border-slate-200 bg-white px-3 py-2 text-sm"
                         value={formData.programChoice}
                         onChange={(e) => setFormData({ ...formData, programChoice: e.target.value })}
                         required
@@ -312,7 +312,7 @@ export default function PendaftaranPage() {
                 <div className="space-y-6">
                   <h3 className="text-lg font-semibold mb-4">Konfirmasi Data</h3>
 
-                  <div className="bg-slate-50 rounded-xl p-6 space-y-4">
+                  <div className="bg-slate-50 rounded-none p-6 space-y-4">
                     <div>
                       <h4 className="font-medium text-slate-900 mb-2">Data Santri</h4>
                       <div className="grid grid-cols-2 gap-2 text-sm">
@@ -339,7 +339,7 @@ export default function PendaftaranPage() {
                     </div>
                   </div>
 
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
+                  <div className="bg-amber-50 border border-amber-200 rounded-none p-4 text-sm text-amber-800">
                     <strong>Catatan:</strong> Pastikan data yang diisi sudah benar. Tim kami akan
                     menghubungi Anda untuk proses verifikasi dan wawancara.
                   </div>
@@ -368,3 +368,6 @@ export default function PendaftaranPage() {
     </>
   )
 }
+
+
+

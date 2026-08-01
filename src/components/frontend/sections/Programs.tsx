@@ -32,7 +32,7 @@ export function Programs({
 }: ProgramsProps) {
   return (
     <section className="py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
@@ -58,7 +58,7 @@ export function Programs({
               href={`/programs/${program.slug}`}
               className="group block"
             >
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+              <div className="bg-white rounded-none shadow-sm overflow-hidden hover:shadow-md transition-shadow">
                 {program.featuredImage && (
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
@@ -68,7 +68,7 @@ export function Programs({
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {program.category && (
-                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-slate-700">
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-none text-xs font-medium text-slate-700">
                         {program.category}
                       </div>
                     )}
@@ -103,3 +103,5 @@ export function Programs({
     </section>
   )
 }
+
+

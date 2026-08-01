@@ -34,7 +34,7 @@ export function LatestPosts({
 }: LatestPostsProps) {
   return (
     <section className="py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
@@ -62,7 +62,7 @@ export function LatestPosts({
               className="group block"
             >
               <div className={cn(
-                'bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow',
+                'bg-white rounded-none shadow-sm overflow-hidden hover:shadow-md transition-shadow',
                 layout === 'list' && 'flex'
               )}>
                 {post.featuredImage && (
@@ -118,3 +118,5 @@ export function LatestPosts({
     </section>
   )
 }
+
+

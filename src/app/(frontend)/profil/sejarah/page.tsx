@@ -13,7 +13,7 @@ export default function SejarahPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg max-w-none">
             <h2>Sejarah Berdirinya Panti Asuhan</h2>
             <p>
@@ -65,3 +65,5 @@ export default function SejarahPage() {
     </>
   )
 }
+
+

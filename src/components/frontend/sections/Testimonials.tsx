@@ -28,7 +28,7 @@ export function Testimonials({
 }: TestimonialsProps) {
   return (
     <section className="py-16 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
@@ -52,7 +52,7 @@ export function Testimonials({
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-xl shadow-sm"
+              className="bg-white p-6 rounded-none shadow-sm"
             >
               {testimonial.rating && (
                 <div className="flex gap-1 mb-4">
@@ -77,7 +77,7 @@ export function Testimonials({
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-12 h-12 rounded-none object-cover"
                   />
                 )}
                 <div>
@@ -100,3 +100,5 @@ export function Testimonials({
     </section>
   )
 }
+
+

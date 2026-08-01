@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 type Slide = {
@@ -44,7 +44,7 @@ export function Hero({
     if (isTransitioning) return
     setIsTransitioning(true)
     setCurrentSlide(index)
-    setTimeout(() => setIsTransitioning(false), 500)
+    setTimeout(() => setIsTransitioning(false), 600)
   }, [isTransitioning])
 
   const nextSlide = useCallback(() => {
@@ -59,40 +59,39 @@ export function Hero({
 
   useEffect(() => {
     if (!hasSlides) return
-    const timer = setInterval(nextSlide, 5000)
+    const timer = setInterval(nextSlide, 6000)
     return () => clearInterval(timer)
   }, [hasSlides, nextSlide])
 
-  // Carousel mode (like the screenshot)
   if (hasSlides) {
     const currentSlideData = slides[currentSlide]
     return (
-      <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden bg-slate-900">
-        {/* Background Image */}
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-slate-950">
         <div
           className={cn(
-            'absolute inset-0 bg-cover bg-center transition-all duration-700',
-            isTransitioning ? 'scale-105 opacity-0' : 'scale-100 opacity-100'
+            'absolute inset-0 bg-cover bg-center transition-all duration-[1.5s]',
+            isTransitioning ? 'scale-110 opacity-0' : 'scale-100 opacity-100'
           )}
           style={{ backgroundImage: `url(${currentSlideData.image})` }}
         />
-        
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
 
-        {/* Content */}
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-2xl">
+        <div className="relative z-10 w-full py-32 lg:py-40">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className={cn(
+                "w-12 h-0.5 bg-white/60 mx-auto mb-8 transition-all duration-700",
+                isTransitioning ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+              )} />
               <h1 className={cn(
-                'text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 transition-all duration-500',
-                isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+                'text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 transition-all duration-700 tracking-tight',
+                isTransitioning ? 'opacity-0 translate-y-6' : 'opacity-100 translate-y-0'
               )}>
                 {currentSlideData.title}
               </h1>
               {currentSlideData.subtitle && (
                 <p className={cn(
-                  'text-lg md:text-xl text-white/80 mb-6 transition-all duration-500 delay-100',
+                  'text-lg md:text-xl text-white/80 mb-4 transition-all duration-700 delay-100',
                   isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
                 )}>
                   {currentSlideData.subtitle}
@@ -100,7 +99,7 @@ export function Hero({
               )}
               {currentSlideData.description && (
                 <p className={cn(
-                  'text-base text-white/70 mb-8 transition-all duration-500 delay-200',
+                  'text-base text-white/60 mb-10 transition-all duration-700 delay-200 max-w-xl mx-auto',
                   isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
                 )}>
                   {currentSlideData.description}
@@ -108,12 +107,13 @@ export function Hero({
               )}
               {currentSlideData.link && (
                 <div className={cn(
-                  'transition-all duration-500 delay-300',
+                  'transition-all duration-700 delay-300',
                   isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
                 )}>
-                  <Button asChild size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+                  <Button asChild size="lg" className="bg-white text-slate-900 hover:bg-white/90 px-8 h-12 text-sm font-medium tracking-wide group">
                     <Link href={currentSlideData.link}>
                       {currentSlideData.linkLabel || 'SELENGKAPNYA'}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </Button>
                 </div>
@@ -122,40 +122,33 @@ export function Hero({
           </div>
         </div>
 
-        {/* Prev/Next Buttons */}
         {slides.length > 1 && (
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-20"
-              aria-label="Previous slide"
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/10"
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all z-20"
-              aria-label="Next slide"
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all border border-white/10"
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </>
         )}
 
-        {/* Navigation Dots */}
         {slides.length > 1 && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
             {slides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
                 className={cn(
-                  'transition-all duration-300 rounded-full',
-                  index === currentSlide
-                    ? 'w-8 h-3 bg-white'
-                    : 'w-3 h-3 bg-white/50 hover:bg-white/75'
+                  'transition-all duration-500',
+                  index === currentSlide ? 'w-8 h-0.5 bg-white' : 'w-4 h-0.5 bg-white/30 hover:bg-white/50'
                 )}
-                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
@@ -164,11 +157,10 @@ export function Hero({
     )
   }
 
-  // Static hero mode (single image)
   const heightClasses = {
-    small: 'py-20',
-    medium: 'py-32',
-    large: 'py-40',
+    small: 'min-h-[40vh]',
+    medium: 'min-h-[50vh]',
+    large: 'min-h-[70vh]',
     fullscreen: 'min-h-screen',
   }
 
@@ -181,59 +173,62 @@ export function Hero({
   return (
     <section
       className={cn(
-        'relative flex items-center',
+        'relative flex items-center justify-center',
         heightClasses[height],
-        !backgroundImage && 'bg-slate-900'
+        !backgroundImage && 'bg-slate-950'
       )}
     >
       {backgroundImage && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }} />
       )}
-
       {overlay !== 'none' && (
-        <div
-          className={cn(
-            'absolute inset-0',
-            overlay === 'dark' && 'bg-black/60',
-            overlay === 'light' && 'bg-white/60',
-            overlay === 'gradient' && 'bg-gradient-to-b from-black/70 to-black/40'
-          )}
-        />
+        <div className={cn(
+          'absolute inset-0',
+          overlay === 'dark' && 'bg-black/50',
+          overlay === 'light' && 'bg-white/50',
+          overlay === 'gradient' && 'bg-gradient-to-b from-black/60 via-black/40 to-black/60'
+        )} />
       )}
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className={cn(alignmentClasses[alignment])}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl">
-            {title}
-          </h1>
-          {subtitle && (
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl">
-              {subtitle}
-            </p>
-          )}
-          {buttons.length > 0 && (
-            <div className={cn(
-              'flex flex-wrap gap-4',
-              alignment === 'center' && 'justify-center',
-              alignment === 'right' && 'justify-end',
-              alignment === 'left' && 'justify-start'
-            )}>
-              {buttons.map((button, index) => (
-                <Button
-                  key={index}
-                  asChild
-                  variant={button.variant === 'outline' ? 'outline' : 'default'}
-                  size="lg"
-                  className={button.variant === 'secondary' ? 'bg-white text-slate-900 hover:bg-white/90' : ''}
-                >
-                  <Link href={button.url}>{button.label}</Link>
-                </Button>
-              ))}
-            </div>
-          )}
+      <div className="relative z-10 w-full py-32 lg:py-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className={cn('max-w-3xl mx-auto', alignmentClasses[alignment])}>
+            <div className="w-12 h-0.5 bg-white/60 mb-8 mx-auto" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 tracking-tight">
+              {title}
+            </h1>
+            {subtitle && (
+              <p className="text-lg md:text-xl text-white/80 mb-10">
+                {subtitle}
+              </p>
+            )}
+            {buttons.length > 0 && (
+              <div className={cn(
+                'flex flex-wrap gap-4',
+                alignment === 'center' && 'justify-center',
+                alignment === 'right' && 'justify-end',
+                alignment === 'left' && 'justify-start'
+              )}>
+                {buttons.map((button, index) => (
+                  <Button
+                    key={index}
+                    asChild
+                    size="lg"
+                    className={cn(
+                      'px-8 h-12 text-sm font-medium tracking-wide group',
+                      button.variant === 'outline'
+                        ? 'bg-transparent text-white border border-white/40 hover:bg-white hover:text-slate-900'
+                        : 'bg-white text-slate-900 hover:bg-white/90'
+                    )}
+                  >
+                    <Link href={button.url}>
+                      {button.label}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

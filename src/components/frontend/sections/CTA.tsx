@@ -30,7 +30,7 @@ export function CTA({
       )}
       <div className={cn(
         'absolute inset-0',
-        backgroundImage ? 'bg-black/60' : 'bg-slate-900'
+        backgroundImage ? 'bg-black/60' : 'bg-blue-700'
       )} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -38,7 +38,7 @@ export function CTA({
           {title}
         </h2>
         {description && (
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             {description}
           </p>
         )}
@@ -48,9 +48,15 @@ export function CTA({
               <Button
                 key={index}
                 asChild
-                variant={button.variant === 'outline' ? 'outline' : 'default'}
                 size="lg"
-                className={button.variant === 'secondary' ? 'bg-white text-slate-900 hover:bg-white/90' : ''}
+                className={cn(
+                  'font-semibold px-8 py-3 text-base',
+                  button.variant === 'outline'
+                    ? 'bg-white text-blue-700 hover:bg-blue-50 border-2 border-white'
+                    : button.variant === 'secondary'
+                    ? 'bg-white text-blue-700 hover:bg-blue-50'
+                    : 'bg-white text-blue-700 hover:bg-blue-50'
+                )}
               >
                 <Link href={button.url}>{button.label}</Link>
               </Button>
@@ -61,3 +67,6 @@ export function CTA({
     </section>
   )
 }
+
+
+

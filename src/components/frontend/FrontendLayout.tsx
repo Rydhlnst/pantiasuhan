@@ -28,9 +28,9 @@ export function FrontendLayout({
   contact,
 }: FrontendLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="frontend-root min-h-screen flex flex-col">
       <Header siteName={siteName} logo={logo} navigation={navigation} />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-[88px]">{children}</main>
       <Footer
         siteName={siteName}
         columns={footer?.columns}
@@ -41,3 +41,4 @@ export function FrontendLayout({
     </div>
   )
 }
+

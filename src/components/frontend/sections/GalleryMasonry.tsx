@@ -34,7 +34,7 @@ export function GalleryMasonry({
 
   return (
     <section className="py-12 lg:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-8">
             {title && (
@@ -53,7 +53,7 @@ export function GalleryMasonry({
               className="break-inside-avoid cursor-pointer group"
               onClick={() => setLightboxImage(image)}
             >
-              <div className="relative overflow-hidden rounded-lg">
+              <div className="relative overflow-hidden rounded-none">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -103,3 +103,5 @@ export function GalleryMasonry({
     </section>
   )
 }
+
+

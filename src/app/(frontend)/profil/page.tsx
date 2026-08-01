@@ -15,7 +15,7 @@ export default function ProfilPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Sejarah Singkat</h2>
@@ -35,7 +35,7 @@ export default function ProfilPage() {
                 pengusaha sukses yang tetap berpegang pada nilai-nilai keislaman.
               </p>
             </div>
-            <div className="bg-slate-100 rounded-2xl p-8">
+            <div className="bg-slate-100 rounded-none p-8">
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-slate-900 mb-2">19</div>
@@ -60,7 +60,7 @@ export default function ProfilPage() {
       </section>
 
       <section className="py-16 lg:py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Visi</h2>
@@ -74,23 +74,23 @@ export default function ProfilPage() {
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Misi</h2>
               <ul className="space-y-3 text-slate-600 text-lg">
                 <li className="flex items-start gap-3">
-                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-blue-500 mt-1">✓</span>
                   Menyelenggarakan pendidikan tahfidz Quran yang berkualitas
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-blue-500 mt-1">✓</span>
                   Melestarikan kajian kitab kuning dengan metode yang efektif
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-blue-500 mt-1">✓</span>
                   Mengintegrasikan kurikulum nasional dengan program pesantren
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-blue-500 mt-1">✓</span>
                   Membina karakter Islami dan akhlak mulia santri
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="text-green-500 mt-1">✓</span>
+                  <span className="text-blue-500 mt-1">✓</span>
                   Mengembangkan potensi santri melalui kegiatan ekstrakurikuler
                 </li>
               </ul>
@@ -123,3 +123,6 @@ export default function ProfilPage() {
     </>
   )
 }
+
+
+

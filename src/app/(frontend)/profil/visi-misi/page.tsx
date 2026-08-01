@@ -13,10 +13,10 @@ export default function VisiMisiPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Visi</h2>
-            <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-r-xl">
+            <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-none">
               <p className="text-lg text-slate-700 leading-relaxed">
                 Berkembangnya Fungsi Pelayanan Sosial Muhammadiyah Dalam Mengentaskan Kemiskinan,
                 meningkatkan Kualitas Hidup Masyarakat Dan Mewujudkan Masyarakat Yang Inklusif
@@ -28,9 +28,9 @@ export default function VisiMisiPage() {
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Misi</h2>
             <div className="space-y-4">
-              <div className="flex items-start gap-4 bg-white border rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-green-600 font-bold">A</span>
+              <div className="flex items-start gap-4 bg-white border rounded-none p-6 shadow-sm">
+                <div className="w-10 h-10 bg-blue-100 rounded-none flex items-center justify-center shrink-0">
+                  <span className="text-blue-600 font-bold">A</span>
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-1">Kesejahteraan Sosial Anak</h3>
@@ -38,9 +38,9 @@ export default function VisiMisiPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-white border rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-green-600 font-bold">B</span>
+              <div className="flex items-start gap-4 bg-white border rounded-none p-6 shadow-sm">
+                <div className="w-10 h-10 bg-blue-100 rounded-none flex items-center justify-center shrink-0">
+                  <span className="text-blue-600 font-bold">B</span>
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-1">Keluarga sebagai Pilar Utama</h3>
@@ -48,9 +48,9 @@ export default function VisiMisiPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 bg-white border rounded-xl p-6 shadow-sm">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center shrink-0">
-                  <span className="text-green-600 font-bold">C</span>
+              <div className="flex items-start gap-4 bg-white border rounded-none p-6 shadow-sm">
+                <div className="w-10 h-10 bg-blue-100 rounded-none flex items-center justify-center shrink-0">
+                  <span className="text-blue-600 font-bold">C</span>
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-900 mb-1">Keterlibatan Masyarakat</h3>
@@ -61,44 +61,44 @@ export default function VisiMisiPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-50 rounded-xl p-6">
+            <div className="bg-slate-50 rounded-none p-6">
               <h3 className="text-xl font-semibold text-slate-900 mb-4">Nilai-Nilai Kami</h3>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Ikhlas dalam beramal
+                  <span className="text-blue-500">✓</span> Ikhlas dalam beramal
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Peduli sesama
+                  <span className="text-blue-500">✓</span> Peduli sesama
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Gotong royong
+                  <span className="text-blue-500">✓</span> Gotong royong
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Amanah
+                  <span className="text-blue-500">✓</span> Amanah
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Profesional
+                  <span className="text-blue-500">✓</span> Profesional
                 </li>
               </ul>
             </div>
 
-            <div className="bg-slate-50 rounded-xl p-6">
+            <div className="bg-slate-50 rounded-none p-6">
               <h3 className="text-xl font-semibold text-slate-900 mb-4">Prinsip Kerja</h3>
               <ul className="space-y-2 text-slate-600">
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Berbasis kebutuhan anak
+                  <span className="text-blue-500">✓</span> Berbasis kebutuhan anak
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Berkelanjutan
+                  <span className="text-blue-500">✓</span> Berkelanjutan
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Partisipatif
+                  <span className="text-blue-500">✓</span> Partisipatif
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Transparan
+                  <span className="text-blue-500">✓</span> Transparan
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Akuntabel
+                  <span className="text-blue-500">✓</span> Akuntabel
                 </li>
               </ul>
             </div>
@@ -117,3 +117,6 @@ export default function VisiMisiPage() {
     </>
   )
 }
+
+
+

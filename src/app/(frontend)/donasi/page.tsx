@@ -52,9 +52,9 @@ export default function DonasiPage() {
       <>
         <Hero title="Terima Kasih" height="small" overlay="dark" />
         <section className="py-16 lg:py-24">
-          <div className="max-w-2xl mx-auto px-4 text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="h-10 w-10 text-green-600" />
+          <div className="max-w-2xl mx-auto mx-auto px-4 text-center">
+            <div className="w-20 h-20 bg-blue-100 rounded-none flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-10 w-10 text-blue-600" />
             </div>
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Donasi Diterima!</h2>
             <p className="text-slate-600 mb-8">
@@ -78,7 +78,7 @@ export default function DonasiPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <h2 className="text-2xl font-bold text-slate-900 mb-6">Formulir Donasi</h2>
@@ -93,9 +93,9 @@ export default function DonasiPage() {
                         type="button"
                         onClick={() => handleAmountSelect(preset)}
                         className={cn(
-                          'p-3 rounded-lg border-2 text-center transition-all',
+                          'p-3 rounded-none border-2 text-center transition-all',
                           amount === preset && !customAmount
-                            ? 'border-green-600 bg-green-50 text-green-600'
+                            ? 'border-blue-600 bg-blue-50 text-blue-600'
                             : 'border-slate-200 hover:border-slate-300'
                         )}
                       >
@@ -122,9 +122,9 @@ export default function DonasiPage() {
                       type="button"
                       onClick={() => setSelectedMethod('bank')}
                       className={cn(
-                        'p-4 rounded-lg border-2 text-center transition-all',
+                        'p-4 rounded-none border-2 text-center transition-all',
                         selectedMethod === 'bank'
-                          ? 'border-green-600 bg-green-50'
+                          ? 'border-blue-600 bg-blue-50'
                           : 'border-slate-200 hover:border-slate-300'
                       )}
                     >
@@ -159,10 +159,10 @@ export default function DonasiPage() {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-slate-50 rounded-2xl p-6 sticky top-24">
+              <div className="bg-slate-50 rounded-none p-6 sticky top-24">
                 <h3 className="font-semibold text-slate-900 mb-4">Rekening Donasi</h3>
 
-                <div className="bg-white rounded-lg p-4 mb-4">
+                <div className="bg-white rounded-none p-4 mb-4">
                   <p className="font-bold text-slate-900">Bank BNI</p>
                   <p className="text-lg font-bold text-slate-900">3271 0102 4236 534</p>
                   <p className="text-sm text-slate-500">a.n. Panti Asuhan Muhammadiyah Asahan</p>
@@ -192,3 +192,6 @@ export default function DonasiPage() {
     </>
   )
 }
+
+
+

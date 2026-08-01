@@ -2,37 +2,23 @@ import React from 'react'
 import { Hero } from '@/components/frontend/sections/Hero'
 import { LatestPosts } from '@/components/frontend/sections/LatestPosts'
 import { CTA } from '@/components/frontend/sections/CTA'
-import { fetchCollection, getMediaUrl } from '@/lib/payload-api'
-
-async function getPosts() {
-  try {
-    const posts = await fetchCollection<{
-      id: string
-      title: string
-      slug: string
-      excerpt?: string
-      publishedAt?: string
-      featuredImage?: string | { url: string } | null
-      category?: { name: string; slug: string } | null
-    }>('posts', 'limit=10&sort=-publishedAt&where[status][equals]=published', { next: { revalidate: 60 } })
-    return posts.docs
-  } catch {
-    return []
-  }
-}
+import { getPosts, getImageUrl } from '@/lib/cms-api'
 
 export default async function BeritaPage() {
-  const posts = await getPosts()
+  let posts: Awaited<ReturnType<typeof getPosts>> = []
+  try {
+    posts = await getPosts({ limit: 20 })
+  } catch {
+    // CMS belum tersedia, tampilkan halaman kosong
+  }
 
   const postsFormatted = posts.map((p) => ({
     title: p.title,
     slug: p.slug,
     excerpt: p.excerpt || '',
-    publishedAt: p.publishedAt || '',
-    featuredImage: typeof p.featuredImage === 'object' && p.featuredImage?.url
-      ? getMediaUrl(p.featuredImage.url)
-      : undefined,
-    category: p.category ? { name: p.category.name, slug: p.category.slug } : undefined,
+    publishedAt: p.publishedAt || p.createdAt,
+    featuredImage: getImageUrl(p.featuredImage),
+    category: p.category ?? undefined,
   }))
 
   return (

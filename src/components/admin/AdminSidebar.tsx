@@ -4,16 +4,17 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { LayoutDashboard, FileText, Image, Package, Users, List, Settings } from 'lucide-react'
 
 const navItems = [
-  { label: 'Dashboard', href: '/admin', icon: '📊' },
-  { label: 'Content', href: '/admin/collections/pages', icon: '📄', children: [
+  { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { label: 'Content', href: '/admin/collections/pages', icon: FileText, children: [
     { label: 'Pages', href: '/admin/collections/pages' },
     { label: 'Posts', href: '/admin/collections/posts' },
     { label: 'Categories', href: '/admin/collections/categories' },
   ]},
-  { label: 'Media', href: '/admin/collections/media', icon: '🖼️' },
-  { label: 'Modules', href: '/admin/collections/announcements', icon: '📦', children: [
+  { label: 'Media', href: '/admin/collections/media', icon: Image },
+  { label: 'Modules', href: '/admin/collections/announcements', icon: Package, children: [
     { label: 'Announcements', href: '/admin/collections/announcements' },
     { label: 'Gallery', href: '/admin/collections/gallery' },
     { label: 'Programs', href: '/admin/collections/programs' },
@@ -22,13 +23,13 @@ const navItems = [
     { label: 'Events', href: '/admin/collections/events' },
     { label: 'Downloads', href: '/admin/collections/downloads' },
   ]},
-  { label: 'People', href: '/admin/collections/users', icon: '👥', children: [
+  { label: 'People', href: '/admin/collections/users', icon: Users, children: [
     { label: 'Users', href: '/admin/collections/users' },
     { label: 'Staff', href: '/admin/collections/staff' },
     { label: 'Volunteers', href: '/admin/collections/volunteers' },
     { label: 'Partners', href: '/admin/collections/partners' },
   ]},
-  { label: 'More', href: '/admin/collections/children-stories', icon: '📋', children: [
+  { label: 'More', href: '/admin/collections/children-stories', icon: List, children: [
     { label: 'Children Stories', href: '/admin/collections/children-stories' },
     { label: 'Facilities', href: '/admin/collections/facilities' },
     { label: 'Timeline', href: '/admin/collections/timeline' },
@@ -36,7 +37,7 @@ const navItems = [
     { label: 'Donation Info', href: '/admin/collections/donation-information' },
     { label: 'Messages', href: '/admin/collections/contact-submissions' },
   ]},
-  { label: 'Settings', href: '/admin/globals/settings', icon: '⚙️', children: [
+  { label: 'Settings', href: '/admin/globals/settings', icon: Settings, children: [
     { label: 'Website Settings', href: '/admin/globals/settings' },
     { label: 'Navigation', href: '/admin/globals/navigation' },
     { label: 'Footer', href: '/admin/globals/footer' },
@@ -53,47 +54,50 @@ export function AdminSidebar() {
     <aside className="w-64 bg-slate-900 text-white min-h-screen">
       <div className="p-4">
         <Link href="/admin" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-white flex items-center justify-center">
             <span className="text-slate-900 font-bold">B</span>
           </div>
           <span className="font-semibold">Beres CMS</span>
         </Link>
       </div>
       <nav className="mt-4">
-        {navItems.map((item) => (
-          <div key={item.href}>
-            <Link
-              href={item.href}
-              className={cn(
-                'flex items-center gap-3 px-4 py-2 text-sm transition-colors',
-                pathname === item.href
-                  ? 'bg-slate-800 text-white'
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+        {navItems.map((item) => {
+          const IconComponent = item.icon
+          return (
+            <div key={item.href}>
+              <Link
+                href={item.href}
+                className={cn(
+                  'flex items-center gap-3 px-4 py-2 text-sm transition-colors',
+                  pathname === item.href
+                    ? 'bg-slate-800 text-white'
+                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                )}
+              >
+                <IconComponent className="h-4 w-4" />
+                <span>{item.label}</span>
+              </Link>
+              {item.children && (
+                <div className="ml-6">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      className={cn(
+                        'block px-4 py-1.5 text-sm transition-colors',
+                        pathname === child.href
+                          ? 'text-white'
+                          : 'text-slate-400 hover:text-white'
+                      )}
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
               )}
-            >
-              <span>{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-            {item.children && (
-              <div className="ml-6">
-                {item.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    className={cn(
-                      'block px-4 py-1.5 text-sm transition-colors',
-                      pathname === child.href
-                        ? 'text-white'
-                        : 'text-slate-400 hover:text-white'
-                    )}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+            </div>
+          )
+        })}
       </nav>
     </aside>
   )

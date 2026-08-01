@@ -13,7 +13,7 @@ export default function LayananPutraPage() {
       />
 
       <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6">Tentang Panti Putra</h2>
@@ -26,9 +26,9 @@ export default function LayananPutraPage() {
                 untuk membentuk generasi yang beriman, bertakwa, dan berprestasi.
               </p>
 
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <h3 className="font-semibold text-green-800 mb-2">Fasilitas:</h3>
-                <ul className="text-sm text-green-700 space-y-1">
+              <div className="bg-blue-50 border border-blue-200 rounded-none p-4 mb-6">
+                <h3 className="font-semibold text-blue-800 mb-2">Fasilitas:</h3>
+                <ul className="text-sm text-blue-700 space-y-1">
                   <li>• Asrama yang nyaman</li>
                   <li>• Ruang belajar</li>
                   <li>• Musholla</li>
@@ -37,7 +37,7 @@ export default function LayananPutraPage() {
                 </ul>
               </div>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="bg-blue-50 border border-blue-200 rounded-none p-4">
                 <h3 className="font-semibold text-blue-800 mb-2">Kegiatan:</h3>
                 <ul className="text-sm text-blue-700 space-y-1">
                   <li>• Sholat berjamaah</li>
@@ -49,7 +49,7 @@ export default function LayananPutraPage() {
               </div>
             </div>
 
-            <div className="relative aspect-video rounded-xl overflow-hidden">
+            <div className="relative aspect-video rounded-none overflow-hidden">
               <img
                 src="/images/panti/gedung-putra.jpg"
                 alt="Panti Asuhan Putra Muhammadiyah Asahan"
@@ -71,3 +71,6 @@ export default function LayananPutraPage() {
     </>
   )
 }
+
+
+

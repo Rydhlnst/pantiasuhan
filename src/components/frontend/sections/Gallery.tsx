@@ -36,7 +36,7 @@ export function Gallery({
 
   return (
     <section className="py-16 lg:py-24 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto mx-auto px-4 sm:px-6 lg:px-8">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && (
@@ -56,7 +56,7 @@ export function Gallery({
           {images.map((image, index) => (
             <div
               key={index}
-              className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
+              className="relative aspect-square overflow-hidden rounded-none group cursor-pointer"
               onClick={() => layout === 'lightbox' && setLightboxImage(image)}
             >
               <Image
@@ -106,3 +106,5 @@ export function Gallery({
     </section>
   )
 }
+
+
