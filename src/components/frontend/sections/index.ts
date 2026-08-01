@@ -1,0 +1,8 @@
+export { Hero } from './Hero'
+export { Statistics } from './Statistics'
+export { Programs } from './Programs'
+export { CTA } from './CTA'
+export { Testimonials } from './Testimonials'
+export { FAQ } from './FAQ'
+export { Gallery } from './Gallery'
+export { LatestPosts } from './LatestPosts'
