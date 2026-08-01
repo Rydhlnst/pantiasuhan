@@ -30,7 +30,7 @@ export function CTA({
       )}
       <div className={cn(
         'absolute inset-0',
-        backgroundImage ? 'bg-black/60' : 'bg-blue-700'
+        backgroundImage ? 'bg-black/60' : 'bg-gradient-to-br from-sky-500 to-cyan-500'
       )} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -52,10 +52,10 @@ export function CTA({
                 className={cn(
                   'font-semibold px-8 py-3 text-base',
                   button.variant === 'outline'
-                    ? 'bg-white text-blue-700 hover:bg-blue-50 border-2 border-white'
+                    ? 'bg-white text-sky-600 hover:bg-sky-50 border-2 border-white'
                     : button.variant === 'secondary'
-                    ? 'bg-white text-blue-700 hover:bg-blue-50'
-                    : 'bg-white text-blue-700 hover:bg-blue-50'
+                    ? 'bg-white text-sky-600 hover:bg-sky-50'
+                    : 'bg-white text-sky-600 hover:bg-sky-50'
                 )}
               >
                 <Link href={button.url}>{button.label}</Link>

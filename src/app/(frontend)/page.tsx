@@ -14,12 +14,12 @@ const DEFAULT_WHATSAPP = '6282175723169'
 const DEFAULT_ADDRESS = 'Jl. Setia Budi, Kel. Selawan, Kec. Kisaran Timur, Kab. Asahan, Prov. Sumatera Utara'
 const DEFAULT_SITE_NAME = 'Panti Asuhan Muhammadiyah Asahan'
 const FALLBACK_IMAGES = [
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38.jpeg',
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.38 (1).jpeg',
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (1).jpeg',
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39 (2).jpeg',
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.39.jpeg',
-  '/images/panti/WhatsApp Image 2026-07-31 at 22.01.40.jpeg',
+  '/images/panti/kegiatan-1.jpg',
+  '/images/panti/gedung-putri-orang.jpg',
+  '/images/panti/gedung-putra.jpg',
+  '/images/panti/kegiatan-2.jpg',
+  '/images/panti/kegiatan-3.jpg',
+  '/images/panti/kegiatan-4.jpg',
 ]
 
 export default async function HomePage() {
@@ -110,21 +110,21 @@ export default async function HomePage() {
           {
             title: 'Panti Asuhan Anak Yatim Muhammadiyah',
             subtitle: 'Kisaran - Asahan, Sumatera Utara',
-            image: displayImages[0]?.src,
+            image: '/images/panti/ramai2.jpeg',
             link: '/profil/tentang',
             linkLabel: 'Selengkapnya',
           },
           {
             title: 'Layanan Panti Putra & Putri',
             subtitle: 'Melayani anak yatim, piatu, dan fakir miskin',
-            image: displayImages[1]?.src,
+            image: '/images/panti/ramai2.jpeg',
             link: '/layanan/putra',
             linkLabel: 'Lihat Layanan',
           },
           {
             title: 'Mari Bersedekah Bersama',
             subtitle: 'Bantu kami wujudkan kesejahteraan anak asuh',
-            image: displayImages[2]?.src,
+            image: '/images/panti/ramai2.jpeg',
             link: '/donasi',
             linkLabel: 'Donasi Sekarang',
           },
@@ -209,25 +209,25 @@ export default async function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-blue-50 border border-blue-200 rounded-none p-6">
-              <h3 className="font-bold text-blue-800 mb-3">Cara 1: Datang Langsung</h3>
-              <p className="text-sm text-blue-700 mb-2">Anda bisa langsung datang ke panti asuhan:</p>
-              <ul className="text-sm text-blue-700 space-y-1">
+            <div className="bg-sky-50 border border-sky-200 rounded-none p-6">
+              <h3 className="font-bold text-sky-800 mb-3">Cara 1: Datang Langsung</h3>
+              <p className="text-sm text-sky-700 mb-2">Anda bisa langsung datang ke panti asuhan:</p>
+              <ul className="text-sm text-sky-700 space-y-1">
                 <li>• Panti Asuhan Putra Muhammadiyah</li>
                 <li>• Panti Asuhan Putri Muhammadiyah</li>
               </ul>
-              <p className="text-sm text-blue-700 mt-2"><strong>Alamat:</strong> {address}</p>
+              <p className="text-sm text-sky-700 mt-2"><strong>Alamat:</strong> {address}</p>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-none p-6">
-              <h3 className="font-bold text-blue-800 mb-3">Cara 2: Transfer Bank</h3>
-              <p className="text-sm text-blue-700 mb-2">Anda bisa mentransfer donasi ke rekening:</p>
+            <div className="bg-sky-50 border border-sky-200 rounded-none p-6">
+              <h3 className="font-bold text-sky-800 mb-3">Cara 2: Transfer Bank</h3>
+              <p className="text-sm text-sky-700 mb-2">Anda bisa mentransfer donasi ke rekening:</p>
               <div className="bg-white rounded-none p-4 mt-2">
                 <p className="font-bold text-slate-900">{settings.bankName || 'Bank BNI'}</p>
                 <p className="text-lg font-bold text-slate-900">{settings.bankAccountNumber || '3271 0102 4236 534'}</p>
                 <p className="text-sm text-slate-600">a.n. {settings.bankAccountName || 'Panti Asuhan Muhammadiyah Asahan'}</p>
               </div>
-              <p className="text-sm text-blue-700 mt-3">
+              <p className="text-sm text-sky-700 mt-3">
                 Setelah transfer, mohon konfirmasi ke Admin Rini: <strong>{phone}</strong>
               </p>
             </div>

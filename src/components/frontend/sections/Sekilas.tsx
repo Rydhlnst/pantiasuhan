@@ -44,13 +44,13 @@ export function Sekilas({ title = 'Sekilas', subtitle, cards }: SekilasProps) {
                   </div>
                 )}
                 <div className="p-5">
-                  <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-base font-semibold text-slate-900 mb-2 group-hover:text-sky-500 transition-colors">
                     {card.title}
                   </h3>
                   <p className="text-sm text-slate-500 line-clamp-2 mb-4 leading-relaxed">
                     {card.description}
                   </p>
-                  <span className="text-sm font-medium text-blue-600 flex items-center gap-1">
+                  <span className="text-sm font-medium text-sky-500 flex items-center gap-1">
                     {card.linkLabel || 'Lihat Detail'}
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>

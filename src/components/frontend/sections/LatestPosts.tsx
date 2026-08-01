@@ -80,11 +80,11 @@ export function LatestPosts({
                 )}
                 <div className="p-6">
                   {post.category && (
-                    <div className="text-sm text-blue-600 font-medium mb-2">
+                    <div className="text-sm text-sky-500 font-medium mb-2">
                       {post.category.name}
                     </div>
                   )}
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-sky-500 transition-colors">
                     {post.title}
                   </h3>
                   {post.excerpt && (

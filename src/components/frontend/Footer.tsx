@@ -37,7 +37,7 @@ export function Footer({
               <img src="/images/logo.png" alt={siteName} className="h-12 w-auto" />
               <div>
                 <div className="font-semibold text-slate-900">{siteName}</div>
-                <div className="text-xs text-blue-600">Melayani dengan Kasih Sayang</div>
+                <div className="text-xs text-sky-500">Melayani dengan Kasih Sayang</div>
               </div>
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed mb-6">{description}</p>
@@ -50,13 +50,13 @@ export function Footer({
                   </div>
                 )}
                 {contact.phone && (
-                  <a href={`tel:${contact.phone}`} className="flex items-center gap-2.5 hover:text-blue-600 transition-colors">
+                  <a href={`tel:${contact.phone}`} className="flex items-center gap-2.5 hover:text-sky-500 transition-colors">
                     <Phone className="h-4 w-4 text-slate-400" />
                     {contact.phone}
                   </a>
                 )}
                 {contact.email && (
-                  <a href={`mailto:${contact.email}`} className="flex items-center gap-2.5 hover:text-blue-600 transition-colors">
+                  <a href={`mailto:${contact.email}`} className="flex items-center gap-2.5 hover:text-sky-500 transition-colors">
                     <Mail className="h-4 w-4 text-slate-400" />
                     {contact.email}
                   </a>
@@ -71,7 +71,7 @@ export function Footer({
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link.url}>
-                    <Link href={link.url} className="text-sm text-slate-500 hover:text-blue-600 transition-colors">
+                    <Link href={link.url} className="text-sm text-slate-500 hover:text-sky-500 transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -91,7 +91,7 @@ export function Footer({
 
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-24 right-6 w-10 h-10 bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center transition-all z-40"
+        className="fixed bottom-24 right-6 w-10 h-10 bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center transition-all z-40 rounded-full shadow-lg shadow-sky-500/30"
       >
         <ArrowUp className="h-4 w-4" />
       </button>

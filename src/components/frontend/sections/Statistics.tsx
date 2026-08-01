@@ -44,26 +44,30 @@ export function Statistics({
   }
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-slate-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref} className="py-16 lg:py-24 bg-sky-500 relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-white/10 blur-2xl" />
+        <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-cyan-400/20 blur-xl" />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {(title || subtitle) && (
           <div className="text-center mb-12">
             {title && <h2 className="text-3xl md:text-4xl font-semibold text-white mb-3 tracking-tight">{title}</h2>}
-            {subtitle && <p className="text-slate-400 max-w-2xl mx-auto">{subtitle}</p>}
+            {subtitle && <p className="text-sky-100 max-w-2xl mx-auto">{subtitle}</p>}
           </div>
         )}
-        <div className={cn('grid gap-px bg-white/5', columnsClasses[columns])}>
+        <div className={cn('grid gap-px bg-white/10', columnsClasses[columns])}>
           {stats.map((stat, index) => (
             <div
               key={index}
               className={cn(
-                "text-center p-8 bg-slate-950 transition-all duration-700",
+                "text-center p-8 bg-sky-500/80 backdrop-blur-sm transition-all duration-700",
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               )}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="text-4xl md:text-5xl font-semibold text-white mb-2 tracking-tight">{stat.value}</div>
-              <div className="text-slate-400 text-sm">{stat.label}</div>
+              <div className="text-sky-100 text-sm">{stat.label}</div>
             </div>
           ))}
         </div>

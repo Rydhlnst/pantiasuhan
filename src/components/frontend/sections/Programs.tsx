@@ -75,7 +75,7 @@ export function Programs({
                   </div>
                 )}
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-sky-500 transition-colors">
                     {program.title}
                   </h3>
                   {program.excerpt && (

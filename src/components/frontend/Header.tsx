@@ -40,11 +40,11 @@ export function Header({
       'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
       scrolled ? 'bg-white shadow-sm' : 'bg-white'
     )}>
-      <div className="bg-slate-900 text-white text-xs py-1.5">
+      <div className="bg-sky-500 text-white text-xs py-1.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <span>Panti Asuhan Yatim Muhammadiyah Kisaran</span>
           {phone && (
-            <a href={`tel:${phone}`} className="flex items-center gap-1 hover:text-slate-300 transition-colors">
+            <a href={`tel:${phone}`} className="flex items-center gap-1 hover:text-sky-100 transition-colors">
               <Phone className="h-3 w-3" />
               {phone}
             </a>
@@ -58,7 +58,7 @@ export function Header({
             <img src={logo || '/images/logo.png'} alt={siteName} className="h-12 w-auto" />
             <div className="hidden sm:block">
               <div className="font-semibold text-slate-900 text-base">{siteName}</div>
-              <div className="text-[10px] text-blue-600 font-medium">Melayani dengan Kasih Sayang</div>
+              <div className="text-[10px] text-sky-500 font-medium">Melayani dengan Kasih Sayang</div>
             </div>
           </Link>
 
@@ -99,7 +99,7 @@ export function Header({
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white px-5 h-9 text-sm">
+            <Button asChild className="bg-sky-500 hover:bg-sky-600 text-white px-5 h-9 text-sm">
               <Link href="/donasi">
                 <Heart className="h-3.5 w-3.5 mr-1.5" />
                 Donasi
@@ -141,7 +141,7 @@ export function Header({
                 )}
               </div>
             ))}
-            <Button asChild className="w-full mt-3 bg-blue-600 hover:bg-blue-700">
+            <Button asChild className="w-full mt-3 bg-sky-500 hover:bg-sky-600">
               <Link href="/donasi" onClick={() => setIsOpen(false)}>Donasi</Link>
             </Button>
           </div>
