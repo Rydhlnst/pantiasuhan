@@ -176,3 +176,13 @@
   opacity: 0;
   animation: fadeUp 0.7s ease-out 0.3s forwards;
 }
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

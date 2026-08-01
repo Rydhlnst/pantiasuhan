@@ -29,8 +29,8 @@ export function FrontendLayout({
 }: FrontendLayoutProps) {
   return (
     <div className="frontend-root min-h-screen flex flex-col">
-      <Header siteName={siteName} logo={logo} navigation={navigation} />
-      <main className="flex-1 pt-[88px]">{children}</main>
+      <Header siteName={siteName} logo={logo} navigation={navigation} phone={contact?.phone} address={contact?.address} />
+      <main className="flex-1 pt-[100px] lg:pt-[110px]">{children}</main>
       <Footer
         siteName={siteName}
         columns={footer?.columns}

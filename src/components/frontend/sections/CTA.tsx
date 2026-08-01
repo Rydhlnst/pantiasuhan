@@ -21,7 +21,7 @@ export function CTA({
   alignment = 'center',
 }: CTAProps) {
   return (
-    <section className="relative py-20 lg:py-28">
+    <section className="relative py-16 md:py-20 lg:py-24">
       {backgroundImage && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -30,15 +30,16 @@ export function CTA({
       )}
       <div className={cn(
         'absolute inset-0',
-        backgroundImage ? 'bg-black/60' : 'bg-gradient-to-br from-sky-500 to-cyan-500'
+        backgroundImage ? 'bg-black/60' : 'bg-[#1e3a5f]'
       )} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
           {title}
         </h2>
+        <div className="w-12 h-1 bg-white/60 mx-auto mb-4" />
         {description && (
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             {description}
           </p>
         )}
@@ -52,10 +53,10 @@ export function CTA({
                 className={cn(
                   'font-semibold px-8 py-3 text-base',
                   button.variant === 'outline'
-                    ? 'bg-white text-sky-600 hover:bg-sky-50 border-2 border-white'
+                    ? 'bg-transparent text-white border-2 border-white hover:bg-white/10'
                     : button.variant === 'secondary'
-                    ? 'bg-white text-sky-600 hover:bg-sky-50'
-                    : 'bg-white text-sky-600 hover:bg-sky-50'
+                    ? 'bg-white text-[#1e3a5f] hover:bg-white/90'
+                    : 'bg-white text-[#1e3a5f] hover:bg-white/90'
                 )}
               >
                 <Link href={button.url}>{button.label}</Link>
@@ -67,6 +68,3 @@ export function CTA({
     </section>
   )
 }
-
-
-

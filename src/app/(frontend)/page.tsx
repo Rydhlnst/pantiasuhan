@@ -201,33 +201,50 @@ export default async function HomePage() {
         ]}
       />
 
-      <section className="py-12 lg:py-16 bg-white">
+      <section className="py-12 md:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Informasi Donasi</h2>
-            <p className="text-slate-600">Cara Berdonasi</p>
+          <div className="text-center mb-8 md:mb-10">
+            <span className="inline-block bg-[#1e3a5f] text-white text-xs font-semibold px-3 py-1 rounded-none mb-4">Donasi</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Informasi Donasi</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div className="bg-sky-50 border border-sky-200 rounded-none p-6">
-              <h3 className="font-bold text-sky-800 mb-3">Cara 1: Datang Langsung</h3>
-              <p className="text-sm text-sky-700 mb-2">Anda bisa langsung datang ke panti asuhan:</p>
-              <ul className="text-sm text-sky-700 space-y-1">
-                <li>• Panti Asuhan Putra Muhammadiyah</li>
-                <li>• Panti Asuhan Putri Muhammadiyah</li>
+            <div className="bg-white rounded-none p-6 shadow-sm border border-slate-100">
+              <div className="w-12 h-12 bg-[#1e3a5f]/10 flex items-center justify-center mb-4">
+                <svg className="h-6 w-6 text-[#1e3a5f]" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-slate-900 mb-3">Cara 1: Datang Langsung</h3>
+              <p className="text-sm text-slate-600 mb-2">Anda bisa langsung datang ke panti asuhan:</p>
+              <ul className="text-sm text-slate-600 space-y-2">
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-[#1e3a5f] rounded-none"></span>
+                  Panti Asuhan Putra Muhammadiyah
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-2 h-2 bg-pink-500 rounded-none"></span>
+                  Panti Asuhan Putri Muhammadiyah
+                </li>
               </ul>
-              <p className="text-sm text-sky-700 mt-2"><strong>Alamat:</strong> {address}</p>
+              <p className="text-sm text-slate-500 mt-3"><strong>Alamat:</strong> {address}</p>
             </div>
 
-            <div className="bg-sky-50 border border-sky-200 rounded-none p-6">
-              <h3 className="font-bold text-sky-800 mb-3">Cara 2: Transfer Bank</h3>
-              <p className="text-sm text-sky-700 mb-2">Anda bisa mentransfer donasi ke rekening:</p>
-              <div className="bg-white rounded-none p-4 mt-2">
-                <p className="font-bold text-slate-900">{settings.bankName || 'Bank BNI'}</p>
-                <p className="text-lg font-bold text-slate-900">{settings.bankAccountNumber || '3271 0102 4236 534'}</p>
-                <p className="text-sm text-slate-600">a.n. {settings.bankAccountName || 'Panti Asuhan Muhammadiyah Asahan'}</p>
+            <div className="bg-white rounded-none p-6 shadow-sm border border-slate-100">
+              <div className="w-12 h-12 bg-[#1e3a5f]/10 flex items-center justify-center mb-4">
+                <svg className="h-6 w-6 text-[#1e3a5f]" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                </svg>
               </div>
-              <p className="text-sm text-sky-700 mt-3">
+              <h3 className="font-bold text-slate-900 mb-3">Cara 2: Transfer Bank</h3>
+              <p className="text-sm text-slate-600 mb-2">Anda bisa mentransfer donasi ke rekening:</p>
+              <div className="bg-slate-50 rounded-none p-4 mt-2">
+                <p className="font-bold text-slate-900">{settings.bankName || 'Bank BNI'}</p>
+                <p className="text-lg font-bold text-[#1e3a5f]">{settings.bankAccountNumber || '3271 0102 4236 534'}</p>
+                <p className="text-sm text-slate-500">a.n. {settings.bankAccountName || 'Panti Asuhan Muhammadiyah Asahan'}</p>
+              </div>
+              <p className="text-sm text-slate-500 mt-3">
                 Setelah transfer, mohon konfirmasi ke Admin Rini: <strong>{phone}</strong>
               </p>
             </div>
