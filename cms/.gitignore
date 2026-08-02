@@ -1,5 +1,0 @@
-node_modules/
-.keystone/
-.env
-schema.prisma
-schema.graphql

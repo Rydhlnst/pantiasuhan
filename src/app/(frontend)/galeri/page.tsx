@@ -6,10 +6,12 @@ import { getMediaItems } from '@/lib/cms-api'
 
 export default async function GaleriPage() {
   let media: Awaited<ReturnType<typeof getMediaItems>> = []
+  let dbError = false
   try {
-    media = await getMediaItems(50)
-  } catch {
-    // CMS belum tersedia
+    media = await getMediaItems(100)
+  } catch (err) {
+    console.error('Galeri page DB error:', err)
+    dbError = true
   }
 
   const galleryImages = media
