@@ -6,7 +6,7 @@ import { Statistics } from '@/components/frontend/sections/Statistics'
 import { GalleryMasonry } from '@/components/frontend/sections/GalleryMasonry'
 import { LatestPosts } from '@/components/frontend/sections/LatestPosts'
 import { CTA } from '@/components/frontend/sections/CTA'
-import { SponsorBanner } from '@/components/frontend/sections/SponsorBanner'
+import { BadanUsaha } from '@/components/frontend/sections/BadanUsaha'
 import { WhatsAppButton } from '@/components/frontend/WhatsAppButton'
 import { getSiteSettings, getMediaItems, getPosts } from '@/lib/cms-api'
 
@@ -253,11 +253,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <SponsorBanner
-        images={[
+      <BadanUsaha
+        sponsors={[
           '/images/sponsors/sponsor-1.jpeg',
           '/images/sponsors/sponsor-2.jpeg',
         ]}
+        warungImage="/images/panti/warung.jpg"
+        depotImage="/images/panti/depot-air.jpg"
+        papanBungaImage="/images/panti/papan-bunga.jpg"
       />
 
       <WhatsAppButton
