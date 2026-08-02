@@ -4,6 +4,8 @@ import { GalleryMasonry } from '@/components/frontend/sections/GalleryMasonry'
 import { CTA } from '@/components/frontend/sections/CTA'
 import { getMediaItems } from '@/lib/cms-api'
 
+export const dynamic = 'force-dynamic'
+
 export default async function GaleriPage() {
   let media: Awaited<ReturnType<typeof getMediaItems>> = []
   let dbError = false
