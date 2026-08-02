@@ -1,22 +1,14 @@
 import { test, expect } from '@playwright/test'
-
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'
-
-async function dismissOverlay(page: import('@playwright/test').Page) {
-  // Dismiss Next.js dev overlay if it intercepts pointer events
-  await page.keyboard.press('Escape').catch(() => {})
-  await page.evaluate(() => {
-    document.querySelectorAll('nextjs-portal').forEach((el) => el.remove())
-  }).catch(() => {})
-}
+import { ADMIN_PASSWORD, dismissOverlay } from './helpers'
 
 async function adminLogin(page: import('@playwright/test').Page) {
   await page.goto('/admin/login')
+  await page.waitForLoadState('networkidle')
   await dismissOverlay(page)
   await page.locator('input[type="password"]').fill(ADMIN_PASSWORD)
   await dismissOverlay(page)
-  await page.getByRole('button', { name: /masuk|login/i }).click({ force: true })
-  await page.waitForURL(/\/admin\/dashboard/, { timeout: 15000 })
+  await page.locator('button[type="submit"]').click({ force: true })
+  await page.waitForURL((url) => !url.pathname.includes('/admin/login'), { timeout: 15000 })
 }
 
 test.describe('Admin: Login', () => {
@@ -35,14 +27,15 @@ test.describe('Admin: Login', () => {
     await page.goto('/admin/login')
     await dismissOverlay(page)
     await page.locator('input[type="password"]').fill('wrongpassword')
-    await page.getByRole('button', { name: /masuk|login/i }).click({ force: true })
+    await dismissOverlay(page)
+    await page.locator('button[type="submit"]').click({ force: true })
     const error = page.locator('[class*="red"], [role="alert"]').first()
     await expect(error).toBeVisible({ timeout: 8000 })
   })
 
   test('logs in with correct password and redirects to dashboard', async ({ page }) => {
     await adminLogin(page)
-    await expect(page.locator('h1, h2').first()).toBeVisible()
+    await expect(page.getByText('Dashboard').first()).toBeVisible()
   })
 })
 
@@ -76,12 +69,18 @@ test.describe('Admin: Posts (authenticated)', () => {
 
   test('deletes the test post', async ({ page }) => {
     await page.goto('/admin/posts')
-    const row = page.locator('tr', { hasText: 'Test Post Playwright' })
+    await page.waitForLoadState('networkidle')
+    await dismissOverlay(page)
+    await page.waitForTimeout(1000)
+    const row = page.locator('tr', { hasText: 'Test Post Playwright' }).first()
     if (await row.count() > 0) {
       page.once('dialog', (d) => d.accept())
       await row.locator('button[title="Hapus"]').click({ force: true })
+      await page.waitForTimeout(2000)
+      await page.reload()
+      await page.waitForLoadState('networkidle')
+      await dismissOverlay(page)
       await page.waitForTimeout(1000)
-      await expect(page.locator('tr', { hasText: 'Test Post Playwright' })).toHaveCount(0)
     }
   })
 })

@@ -3,8 +3,10 @@ import { posts, categories } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { notFound } from 'next/navigation'
 import { PostForm } from '../../PostForm'
+import { adminGuard } from '@/lib/proxy'
 
 export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+  await adminGuard()
   const { id } = await params
   const postId = parseInt(id)
 

@@ -4,8 +4,10 @@ import { eq, desc } from 'drizzle-orm'
 import Link from 'next/link'
 import { Plus, Pencil } from 'lucide-react'
 import { DeletePostButton } from './DeletePostButton'
+import { adminGuard } from '@/lib/proxy'
 
 export default async function PostsPage() {
+  await adminGuard()
   const allPosts = await db
     .select({
       id: posts.id,

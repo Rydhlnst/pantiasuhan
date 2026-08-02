@@ -1,9 +1,7 @@
-import { adminGuard } from '@/lib/proxy'
 import { AdminLayout } from '@/components/admin/AdminLayout'
 import { Toaster } from 'sonner'
 
-export default async function AdminRootLayout({ children }: { children: React.ReactNode }) {
-  await adminGuard()
+export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <AdminLayout>{children}</AdminLayout>

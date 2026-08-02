@@ -3,8 +3,10 @@ import { posts, media, contactSubmissions } from '@/db/schema'
 import { eq, count } from 'drizzle-orm'
 import Link from 'next/link'
 import { FileText, Images, MessageSquare, Plus } from 'lucide-react'
+import { adminGuard } from '@/lib/proxy'
 
 export default async function DashboardPage() {
+  await adminGuard()
   const [[postCount], [mediaCount], [messageCount]] = await Promise.all([
     db.select({ count: count() }).from(posts),
     db.select({ count: count() }).from(media),
