@@ -50,7 +50,7 @@ export function Header({
             <Link href="/" className="flex items-center gap-3 md:gap-4 shrink-0">
               <img src={logo || '/images/logo.png'} alt={siteName} className="h-14 md:h-20 w-auto" />
               <div>
-                <h1 className="font-bold text-[#1e3a5f] text-xs sm:text-sm md:text-lg leading-tight uppercase">
+                <h1 className="font-bold text-yellow-500 text-xs sm:text-sm md:text-lg leading-tight uppercase">
                   {siteName}
                 </h1>
                 {address && (
