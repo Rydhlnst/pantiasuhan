@@ -28,7 +28,7 @@ export function FrontendLayout({
   contact,
 }: FrontendLayoutProps) {
   return (
-    <div className="frontend-root min-h-screen flex flex-col">
+    <div className="frontend-root min-h-screen flex flex-col overflow-x-hidden">
       <Header siteName={siteName} logo={logo} navigation={navigation} phone={contact?.phone} address={contact?.address} />
       <main className="flex-1 pt-[100px] lg:pt-[110px]">{children}</main>
       <Footer

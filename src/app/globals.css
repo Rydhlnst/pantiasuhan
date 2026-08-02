@@ -116,6 +116,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
   }
   .frontend-root * {
     @apply border-border outline-ring/50;
