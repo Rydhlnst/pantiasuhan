@@ -163,57 +163,37 @@ export function BadanUsaha({
           )}
         </div>
 
-        {/* Mobile: slide-by-slide */}
+        {/* Mobile: horizontal scroll */}
         <div className="md:hidden">
-          <div className="relative overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${current * 100}%)` }}
-            >
+          <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide scroll-smooth">
+            <div className="flex gap-4 w-max">
               {slides.map((slide, index) => (
-                <div key={index} className="flex-shrink-0 w-full">
-                  <Link
-                    href={slide.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative aspect-[16/10] bg-white shadow-md overflow-hidden"
-                  >
+                <Link
+                  key={index}
+                  href={slide.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-shrink-0 w-[260px] bg-white shadow-md overflow-hidden group"
+                >
+                  <div className="relative aspect-[16/10]">
                     <Image
                       src={slide.src}
                       alt={slide.label}
                       fill
-                      className="object-contain"
-                      sizes="100vw"
+                      className="object-contain group-hover:scale-105 transition-transform duration-300"
+                      sizes="260px"
                       priority={index === 0}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
-                      <span className="inline-block bg-[#1e3a5f] text-white text-xs font-semibold px-3 py-1.5 rounded-none">
-                        {slide.label}
-                      </span>
-                    </div>
-                  </Link>
-                </div>
+                  </div>
+                  <div className="p-2.5 bg-[#1e3a5f]">
+                    <span className="text-white text-xs font-semibold line-clamp-1">
+                      {slide.label}
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
-
-          {/* Mobile dots */}
-          {slides.length > 1 && (
-            <div className="flex justify-center gap-2 mt-3">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goTo(index)}
-                  className={cn(
-                    'transition-all duration-500 rounded-full',
-                    index === current
-                      ? 'w-6 h-1.5 bg-[#1e3a5f]'
-                      : 'w-1.5 h-1.5 bg-slate-300',
-                  )}
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </section>
