@@ -102,7 +102,7 @@ export function Hero({
               )} />
               <h1
                 key={`title-${currentSlide}`}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-tight drop-shadow-lg hero-fade-up"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-500 mb-4 md:mb-6 tracking-tight drop-shadow-lg hero-fade-up"
               >
                 {currentSlideData.title}
               </h1>
