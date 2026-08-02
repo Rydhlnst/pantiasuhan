@@ -95,7 +95,7 @@ export function Footer({
       {/* Scroll to top button */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 w-10 h-10 bg-[#1e3a5f] hover:bg-[#162d4a] text-white flex items-center justify-center transition-all z-40 rounded-full shadow-lg"
+        className="fixed bottom-6 right-24 w-10 h-10 bg-[#1e3a5f] hover:bg-[#162d4a] text-white flex items-center justify-center transition-all z-40 rounded-full shadow-lg"
       >
         <ArrowUp className="h-4 w-4" />
       </button>
