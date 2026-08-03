@@ -252,7 +252,7 @@ export default function BerandaPage() {
               </div>
               <h3 className="font-bold text-slate-900 mb-3">Transfer Bank</h3>
               <div className="bg-slate-50 rounded-none p-4">
-                <p className="font-bold text-slate-900">Bank BNI</p>
+                <p className="font-bold text-slate-900">Bank BRI</p>
                 <p className="text-xl font-bold text-[#1e3a5f]">3271 0102 4236 534</p>
                 <p className="text-sm text-slate-500">a.n. Panti Asuhan Muhammadiyah Asahan</p>
               </div>
@@ -287,9 +287,9 @@ export default function BerandaPage() {
           '/images/sponsors/sponsor-1.jpeg',
           '/images/sponsors/sponsor-2.jpeg',
         ]}
-        warungImage="/images/panti/warung.jpg"
-        depotImage="/images/panti/depot-air.jpg"
-        papanBungaImage="/images/panti/papan-bunga.jpg"
+        warungImage="/images/panti/warung.jpeg"
+        depotImage="/images/panti/depotair.jpeg"
+        papanBungaImage="/images/panti/image.png"
       />
 
       <WhatsAppButton

@@ -21,13 +21,13 @@ type SlideData = {
 
 export function BadanUsaha({
   sponsors = [],
-  warungImage = '/images/panti/warung.jpg',
-  depotImage = '/images/panti/depot-air.jpg',
-  papanBungaImage = '/images/panti/papan-bunga.jpg',
+  warungImage = '/images/panti/warung.jpeg',
+  depotImage = '/images/panti/depotair.jpeg',
+  papanBungaImage = '/images/panti/image.png',
   whatsappNumber = '6281362453342',
 }: BadanUsahaProps) {
   const [current, setCurrent] = useState(0)
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  const isTransitioningRef = useRef(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const sponsorLabels = [
@@ -72,25 +72,25 @@ export function BadanUsaha({
 
   const goTo = useCallback(
     (index: number) => {
-      if (isTransitioning || slides.length <= 1) return
-      setIsTransitioning(true)
+      if (isTransitioningRef.current || slides.length <= 1) return
+      isTransitioningRef.current = true
       setCurrent(index)
-      setTimeout(() => setIsTransitioning(false), 700)
+      setTimeout(() => { isTransitioningRef.current = false }, 700)
     },
-    [isTransitioning, slides.length],
+    [slides.length],
   )
 
   useEffect(() => {
     if (slides.length <= 1) return
     const timer = setInterval(() => {
-      if (!isTransitioning) {
-        setIsTransitioning(true)
+      if (!isTransitioningRef.current) {
+        isTransitioningRef.current = true
         setCurrent((prev) => (prev + 1) % slides.length)
-        setTimeout(() => setIsTransitioning(false), 700)
+        setTimeout(() => { isTransitioningRef.current = false }, 700)
       }
     }, 4000)
     return () => clearInterval(timer)
-  }, [slides.length, isTransitioning])
+  }, [slides.length])
 
   if (slides.length === 0) return null
 

@@ -67,7 +67,7 @@ async function migrate() {
       '082175723169',
       '6282175723169',
       'Jl. Setia Budi, Kel. Selawan, Kec. Kisaran Timur, Kab. Asahan, Prov. Sumatera Utara',
-      'Bank BNI',
+      'Bank BRI',
       '327101024236534',
       'Panti Asuhan Muhammadiyah Asahan'
     )

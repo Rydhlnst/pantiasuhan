@@ -92,7 +92,7 @@ export default function SettingsPage() {
         <section className="bg-white border border-slate-200 rounded p-6 space-y-4">
           <h2 className="font-semibold text-slate-800">Informasi Donasi</h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            <Field label="Nama Bank" value={form.bankName} onChange={set('bankName')} placeholder="Bank BNI" />
+            <Field label="Nama Bank" value={form.bankName} onChange={set('bankName')} placeholder="Bank BRI" />
             <Field label="No. Rekening" value={form.bankAccountNumber} onChange={set('bankAccountNumber')} />
             <Field label="Atas Nama" value={form.bankAccountName} onChange={set('bankAccountName')} />
           </div>

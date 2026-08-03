@@ -241,7 +241,7 @@ export default async function HomePage() {
               <h3 className="font-bold text-slate-900 mb-3">Cara 2: Transfer Bank</h3>
               <p className="text-sm text-slate-600 mb-2">Anda bisa mentransfer donasi ke rekening:</p>
               <div className="bg-slate-50 rounded-none p-4 mt-2">
-                <p className="font-bold text-slate-900">{settings.bankName || 'Bank BNI'}</p>
+                <p className="font-bold text-slate-900">{settings.bankName || 'Bank BRI'}</p>
                 <p className="text-lg font-bold text-[#1e3a5f]">{settings.bankAccountNumber || '3271 0102 4236 534'}</p>
                 <p className="text-sm text-slate-500">a.n. {settings.bankAccountName || 'Panti Asuhan Muhammadiyah Asahan'}</p>
               </div>
@@ -258,9 +258,9 @@ export default async function HomePage() {
           '/images/sponsors/sponsor-1.jpeg',
           '/images/sponsors/sponsor-2.jpeg',
         ]}
-        warungImage="/images/panti/warung.jpg"
-        depotImage="/images/panti/depot-air.jpg"
-        papanBungaImage="/images/panti/papan-bunga.jpg"
+        warungImage="/images/panti/warung.jpeg"
+        depotImage="/images/panti/depotair.jpeg"
+        papanBungaImage="/images/panti/image.png"
       />
 
       <WhatsAppButton

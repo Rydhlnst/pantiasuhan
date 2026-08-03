@@ -163,7 +163,7 @@ export default function DonasiPage() {
                 <h3 className="font-semibold text-slate-900 mb-4">Rekening Donasi</h3>
 
                 <div className="bg-white rounded-none p-4 mb-4">
-                  <p className="font-bold text-slate-900">Bank BNI</p>
+                  <p className="font-bold text-slate-900">Bank BRI</p>
                   <p className="text-lg font-bold text-slate-900">3271 0102 4236 534</p>
                   <p className="text-sm text-slate-500">a.n. Panti Asuhan Muhammadiyah Asahan</p>
                 </div>
