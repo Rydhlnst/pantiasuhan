@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: 'https://pantiasuhan-mu.vercel.app/sitemap.xml',
+    sitemap: 'https://pantiasuhanmuhammadiyahkisaran.web.id/sitemap.xml',
   }
 }

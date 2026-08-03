@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Panti Asuhan Muhammadiyah Asahan | Yatim & Piatu Kisaran',
     description:
       'Panti Asuhan Anak Yatim Putra/Putri Muhammadiyah Asahan di Kisaran, Sumatera Utara.',
-    url: 'https://pantiasuhan-mu.vercel.app',
+    url: 'https://pantiasuhanmuhammadiyahkisaran.web.id',
   },
 }
 

@@ -6,8 +6,8 @@ export function JsonLd() {
     alternateName: 'Panti Asuhan Yatim Muhammadiyah Asahan',
     description:
       'Panti Asuhan Anak Yatim Putra/Putri Muhammadiyah Asahan di Kisaran, Sumatera Utara. Melayani anak yatim, piatu, fakir miskin, dan terlantar.',
-    url: 'https://pantiasuhan-mu.vercel.app',
-    logo: 'https://pantiasuhan-mu.vercel.app/images/logo.png',
+    url: 'https://pantiasuhanmuhammadiyahkisaran.web.id',
+    logo: 'https://pantiasuhanmuhammadiyahkisaran.web.id/images/logo.png',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Jl. Setia Budi, Kel. Selawan',
@@ -30,10 +30,10 @@ export function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Panti Asuhan Muhammadiyah Asahan',
-    url: 'https://pantiasuhan-mu.vercel.app',
+    url: 'https://pantiasuhanmuhammadiyahkisaran.web.id',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://pantiasuhan-mu.vercel.app/berita?q={search_term_string}',
+      target: 'https://pantiasuhanmuhammadiyahkisaran.web.id/berita?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   }

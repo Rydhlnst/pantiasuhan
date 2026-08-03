@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = 'https://pantiasuhan-mu.vercel.app'
+const BASE_URL = 'https://pantiasuhanmuhammadiyahkisaran.web.id'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

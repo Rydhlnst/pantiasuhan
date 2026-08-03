@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '@fontsource-variable/plus-jakarta-sans'
 import { FrontendLayout } from '@/components/frontend/FrontendLayout'
 
-const SITE_URL = 'https://pantiasuhan-mu.vercel.app'
+const SITE_URL = 'https://pantiasuhanmuhammadiyahkisaran.web.id'
 
 export const metadata: Metadata = {
   title: {
