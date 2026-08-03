@@ -1,4 +1,5 @@
 import React from 'react'
+import type { Metadata } from 'next'
 import { Hero } from '@/components/frontend/sections/Hero'
 import { Sekilas } from '@/components/frontend/sections/Sekilas'
 import { Statistics } from '@/components/frontend/sections/Statistics'
@@ -7,11 +8,25 @@ import { LatestPosts } from '@/components/frontend/sections/LatestPosts'
 import { CTA } from '@/components/frontend/sections/CTA'
 import { BadanUsaha } from '@/components/frontend/sections/BadanUsaha'
 import { WhatsAppButton } from '@/components/frontend/WhatsAppButton'
+import { JsonLd } from '@/components/frontend/JsonLd'
 import { Building, MapPin } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: 'Beranda',
+  description:
+    'Panti Asuhan Anak Yatim Putra/Putri Muhammadiyah Asahan di Kisaran, Sumatera Utara. Melayani anak yatim, piatu, fakir miskin, dan terlantar dengan penuh kasih sayang.',
+  openGraph: {
+    title: 'Panti Asuhan Muhammadiyah Asahan | Yatim & Piatu Kisaran',
+    description:
+      'Panti Asuhan Anak Yatim Putra/Putri Muhammadiyah Asahan di Kisaran, Sumatera Utara.',
+    url: 'https://pantiasuhan-mu.vercel.app',
+  },
+}
 
 export default function BerandaPage() {
   return (
     <>
+      <JsonLd />
       <Hero
         slides={[
           {
