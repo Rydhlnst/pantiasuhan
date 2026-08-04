@@ -103,8 +103,8 @@ export default function KontakPage() {
                   <div>
                     <h3 className="font-semibold text-slate-900 mb-1">Jam Kunjungan</h3>
                     <p className="text-slate-600">
-                      Senin - Sabtu: 08:00 - 17:00<br />
-                      Minggu & Hari Libur: Tutup
+                      Setiap Hari: 05:00 - 22:00<br />
+                      Tidak ada hari libur
                     </p>
                   </div>
                 </div>

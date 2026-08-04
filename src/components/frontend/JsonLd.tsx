@@ -22,6 +22,7 @@ export function JsonLd() {
       contactType: 'customer service',
       availableLanguage: ['Indonesian'],
     },
+    openingHours: 'Mo-Su 05:00-22:00',
     sameAs: [],
     donationUrl: 'https://pantiasuhan-mu.vercel.app/donasi',
   }
